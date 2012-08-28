@@ -41,12 +41,10 @@
     NSError *jsonError = nil;
     NSDictionary *jsonResult = [data objectFromJSONDataWithParseOptions:JKParseOptionNone error:&jsonError];
     
-    if(jsonError)
+    if(jsonError != nil)
         *error = [[RPCError alloc] initWithCode:RPCParseError];
     else
     {
-        NSLog(@"%@", jsonResult);
-        
         NSDictionary *serverError = [jsonResult objectForKey:@"error"];
         if(serverError != nil && [serverError isKindOfClass:[NSDictionary class]])
         {
