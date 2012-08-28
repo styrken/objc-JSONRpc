@@ -1,0 +1,361 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3A9B622415ED2CD2009A74FB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9B622315ED2CD2009A74FB /* UIKit.framework */; };
+		3A9B622615ED2CD2009A74FB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9B622515ED2CD2009A74FB /* Foundation.framework */; };
+		3A9B622815ED2CD2009A74FB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9B622715ED2CD2009A74FB /* CoreGraphics.framework */; };
+		3A9B622E15ED2CD2009A74FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B622C15ED2CD2009A74FB /* InfoPlist.strings */; };
+		3A9B623015ED2CD2009A74FB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B622F15ED2CD2009A74FB /* main.m */; };
+		3A9B623415ED2CD2009A74FB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B623315ED2CD2009A74FB /* AppDelegate.m */; };
+		3A9B624615ED3010009A74FB /* RPCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B624515ED3010009A74FB /* RPCRequest.m */; };
+		3A9B624915ED3021009A74FB /* RPCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B624815ED3021009A74FB /* RPCError.m */; };
+		3A9B624C15ED3030009A74FB /* RPCResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B624B15ED3030009A74FB /* RPCResponse.m */; };
+		3A9B624F15ED3048009A74FB /* RPCBaseClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B624E15ED3048009A74FB /* RPCBaseClient.m */; };
+		3A9B625715ED3FE1009A74FB /* RPCJSONClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B625615ED3FE1009A74FB /* RPCJSONClient.m */; };
+		3A9B625E15ED4F8B009A74FB /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B625A15ED4F8B009A74FB /* CHANGELOG.md */; };
+		3A9B625F15ED4F8B009A74FB /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B625C15ED4F8B009A74FB /* JSONKit.m */; };
+		3A9B626015ED4F8B009A74FB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B625D15ED4F8B009A74FB /* README.md */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3A9B621F15ED2CD2009A74FB /* objc-JSONRpc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "objc-JSONRpc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A9B622315ED2CD2009A74FB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3A9B622515ED2CD2009A74FB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3A9B622715ED2CD2009A74FB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3A9B622B15ED2CD2009A74FB /* objc-JSONRpc-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "objc-JSONRpc-Info.plist"; sourceTree = "<group>"; };
+		3A9B622D15ED2CD2009A74FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3A9B622F15ED2CD2009A74FB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3A9B623115ED2CD2009A74FB /* objc-JSONRpc-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "objc-JSONRpc-Prefix.pch"; sourceTree = "<group>"; };
+		3A9B623215ED2CD2009A74FB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3A9B623315ED2CD2009A74FB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3A9B624415ED3010009A74FB /* RPCRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPCRequest.h; path = "RPC Client/Models/RPCRequest.h"; sourceTree = "<group>"; };
+		3A9B624515ED3010009A74FB /* RPCRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPCRequest.m; path = "RPC Client/Models/RPCRequest.m"; sourceTree = "<group>"; };
+		3A9B624715ED3021009A74FB /* RPCError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPCError.h; path = "RPC Client/Models/RPCError.h"; sourceTree = "<group>"; };
+		3A9B624815ED3021009A74FB /* RPCError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPCError.m; path = "RPC Client/Models/RPCError.m"; sourceTree = "<group>"; };
+		3A9B624A15ED3030009A74FB /* RPCResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPCResponse.h; path = "RPC Client/Models/RPCResponse.h"; sourceTree = "<group>"; };
+		3A9B624B15ED3030009A74FB /* RPCResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPCResponse.m; path = "RPC Client/Models/RPCResponse.m"; sourceTree = "<group>"; };
+		3A9B624D15ED3048009A74FB /* RPCBaseClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPCBaseClient.h; path = "RPC Client/Clients/RPCBaseClient.h"; sourceTree = "<group>"; };
+		3A9B624E15ED3048009A74FB /* RPCBaseClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPCBaseClient.m; path = "RPC Client/Clients/RPCBaseClient.m"; sourceTree = "<group>"; };
+		3A9B625515ED3FE1009A74FB /* RPCJSONClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPCJSONClient.h; path = "RPC Client/Clients/JSON/RPCJSONClient.h"; sourceTree = "<group>"; };
+		3A9B625615ED3FE1009A74FB /* RPCJSONClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPCJSONClient.m; path = "RPC Client/Clients/JSON/RPCJSONClient.m"; sourceTree = "<group>"; };
+		3A9B625A15ED4F8B009A74FB /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
+		3A9B625B15ED4F8B009A74FB /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		3A9B625C15ED4F8B009A74FB /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		3A9B625D15ED4F8B009A74FB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3A9B621C15ED2CD2009A74FB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A9B622415ED2CD2009A74FB /* UIKit.framework in Frameworks */,
+				3A9B622615ED2CD2009A74FB /* Foundation.framework in Frameworks */,
+				3A9B622815ED2CD2009A74FB /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3A9B621415ED2CD2009A74FB = {
+			isa = PBXGroup;
+			children = (
+				3A9B622915ED2CD2009A74FB /* objc-JSONRpc */,
+				3A9B622215ED2CD2009A74FB /* Frameworks */,
+				3A9B622015ED2CD2009A74FB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3A9B622015ED2CD2009A74FB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A9B621F15ED2CD2009A74FB /* objc-JSONRpc.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3A9B622215ED2CD2009A74FB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3A9B622315ED2CD2009A74FB /* UIKit.framework */,
+				3A9B622515ED2CD2009A74FB /* Foundation.framework */,
+				3A9B622715ED2CD2009A74FB /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3A9B622915ED2CD2009A74FB /* objc-JSONRpc */ = {
+			isa = PBXGroup;
+			children = (
+				3A9B622A15ED2CD2009A74FB /* Supporting Files */,
+				3A9B623B15ED2CEC009A74FB /* RPC Client */,
+				3A9B623215ED2CD2009A74FB /* AppDelegate.h */,
+				3A9B623315ED2CD2009A74FB /* AppDelegate.m */,
+			);
+			path = "objc-JSONRpc";
+			sourceTree = "<group>";
+		};
+		3A9B622A15ED2CD2009A74FB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3A9B622B15ED2CD2009A74FB /* objc-JSONRpc-Info.plist */,
+				3A9B622C15ED2CD2009A74FB /* InfoPlist.strings */,
+				3A9B622F15ED2CD2009A74FB /* main.m */,
+				3A9B623115ED2CD2009A74FB /* objc-JSONRpc-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3A9B623B15ED2CEC009A74FB /* RPC Client */ = {
+			isa = PBXGroup;
+			children = (
+				3A9B625815ED4F8B009A74FB /* Helpers */,
+				3A9B623D15ED2F5E009A74FB /* Models */,
+				3A9B623C15ED2F48009A74FB /* Clients */,
+			);
+			name = "RPC Client";
+			sourceTree = "<group>";
+		};
+		3A9B623C15ED2F48009A74FB /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				3A9B625415ED3FA5009A74FB /* JSON */,
+				3A9B624D15ED3048009A74FB /* RPCBaseClient.h */,
+				3A9B624E15ED3048009A74FB /* RPCBaseClient.m */,
+			);
+			name = Clients;
+			sourceTree = "<group>";
+		};
+		3A9B623D15ED2F5E009A74FB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3A9B624415ED3010009A74FB /* RPCRequest.h */,
+				3A9B624515ED3010009A74FB /* RPCRequest.m */,
+				3A9B624A15ED3030009A74FB /* RPCResponse.h */,
+				3A9B624B15ED3030009A74FB /* RPCResponse.m */,
+				3A9B624715ED3021009A74FB /* RPCError.h */,
+				3A9B624815ED3021009A74FB /* RPCError.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		3A9B625415ED3FA5009A74FB /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				3A9B625515ED3FE1009A74FB /* RPCJSONClient.h */,
+				3A9B625615ED3FE1009A74FB /* RPCJSONClient.m */,
+			);
+			name = JSON;
+			sourceTree = "<group>";
+		};
+		3A9B625815ED4F8B009A74FB /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3A9B625915ED4F8B009A74FB /* JSONKit */,
+			);
+			name = Helpers;
+			path = "RPC Client/Helpers";
+			sourceTree = "<group>";
+		};
+		3A9B625915ED4F8B009A74FB /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				3A9B625A15ED4F8B009A74FB /* CHANGELOG.md */,
+				3A9B625D15ED4F8B009A74FB /* README.md */,
+				3A9B625B15ED4F8B009A74FB /* JSONKit.h */,
+				3A9B625C15ED4F8B009A74FB /* JSONKit.m */,
+			);
+			path = JSONKit;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3A9B621E15ED2CD2009A74FB /* objc-JSONRpc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A9B623715ED2CD2009A74FB /* Build configuration list for PBXNativeTarget "objc-JSONRpc" */;
+			buildPhases = (
+				3A9B621B15ED2CD2009A74FB /* Sources */,
+				3A9B621C15ED2CD2009A74FB /* Frameworks */,
+				3A9B621D15ED2CD2009A74FB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "objc-JSONRpc";
+			productName = "objc-JSONRpc";
+			productReference = 3A9B621F15ED2CD2009A74FB /* objc-JSONRpc.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3A9B621615ED2CD2009A74FB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Rasmus Styrk";
+			};
+			buildConfigurationList = 3A9B621915ED2CD2009A74FB /* Build configuration list for PBXProject "objc-JSONRpc" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3A9B621415ED2CD2009A74FB;
+			productRefGroup = 3A9B622015ED2CD2009A74FB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3A9B621E15ED2CD2009A74FB /* objc-JSONRpc */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3A9B621D15ED2CD2009A74FB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A9B622E15ED2CD2009A74FB /* InfoPlist.strings in Resources */,
+				3A9B625E15ED4F8B009A74FB /* CHANGELOG.md in Resources */,
+				3A9B626015ED4F8B009A74FB /* README.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3A9B621B15ED2CD2009A74FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A9B623015ED2CD2009A74FB /* main.m in Sources */,
+				3A9B623415ED2CD2009A74FB /* AppDelegate.m in Sources */,
+				3A9B624615ED3010009A74FB /* RPCRequest.m in Sources */,
+				3A9B624915ED3021009A74FB /* RPCError.m in Sources */,
+				3A9B624C15ED3030009A74FB /* RPCResponse.m in Sources */,
+				3A9B624F15ED3048009A74FB /* RPCBaseClient.m in Sources */,
+				3A9B625715ED3FE1009A74FB /* RPCJSONClient.m in Sources */,
+				3A9B625F15ED4F8B009A74FB /* JSONKit.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3A9B622C15ED2CD2009A74FB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A9B622D15ED2CD2009A74FB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3A9B623515ED2CD2009A74FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3A9B623615ED2CD2009A74FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3A9B623815ED2CD2009A74FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "objc-JSONRpc/objc-JSONRpc-Prefix.pch";
+				INFOPLIST_FILE = "objc-JSONRpc/objc-JSONRpc-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3A9B623915ED2CD2009A74FB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "objc-JSONRpc/objc-JSONRpc-Prefix.pch";
+				INFOPLIST_FILE = "objc-JSONRpc/objc-JSONRpc-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3A9B621915ED2CD2009A74FB /* Build configuration list for PBXProject "objc-JSONRpc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A9B623515ED2CD2009A74FB /* Debug */,
+				3A9B623615ED2CD2009A74FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A9B623715ED2CD2009A74FB /* Build configuration list for PBXNativeTarget "objc-JSONRpc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A9B623815ED2CD2009A74FB /* Debug */,
+				3A9B623915ED2CD2009A74FB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3A9B621615ED2CD2009A74FB /* Project object */;
+}
