@@ -141,10 +141,15 @@
     RPCError *error = nil;
     id result = [self parseResult:rpcresponse.data error:&error];
     
-    if(error != nil && (rpcresponse.error = error))
-        callback(rpcresponse);
-    else if((rpcresponse.error = nil) && (rpcresponse.result = result))
-        callback(rpcresponse);
+    if(error != nil)
+        rpcresponse.error = error;
+    else
+    {
+        rpcresponse.error = nil;
+        rpcresponse.result = result;
+    }
+        
+    callback(rpcresponse);
     
     [self.connections removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
     [self.callbacks removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
@@ -156,8 +161,8 @@
     RPCResponse *rpcresponse = [self.connections objectForKey: [NSNumber numberWithInt:(int)connection]];
     RPCCompletedCallback callback = [self.callbacks objectForKey: [NSNumber numberWithInt:(int)connection]];
         
-    if(rpcresponse.error = [RPCError errorWithCode:RPCNetworkError])
-        callback(rpcresponse);
+    rpcresponse.error = [RPCError errorWithCode:RPCNetworkError];
+    callback(rpcresponse);
     
     [self.connections removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
     [self.callbacks removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
