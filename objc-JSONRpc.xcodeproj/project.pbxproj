@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3A7E9BC315EEA12600C40515 /* BaseRPCClient+Invoke.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E9BC015EEA12600C40515 /* BaseRPCClient+Invoke.m */; };
 		3A7E9BC415EEA12600C40515 /* BaseRPCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E9BC215EEA12600C40515 /* BaseRPCClient.m */; };
+		3A7E9BC715EEA21F00C40515 /* JSONRPCClient+Invoke.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E9BC615EEA21F00C40515 /* JSONRPCClient+Invoke.m */; };
 		3A9B622415ED2CD2009A74FB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9B622315ED2CD2009A74FB /* UIKit.framework */; };
 		3A9B622615ED2CD2009A74FB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9B622515ED2CD2009A74FB /* Foundation.framework */; };
 		3A9B622815ED2CD2009A74FB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9B622715ED2CD2009A74FB /* CoreGraphics.framework */; };
@@ -25,10 +26,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3A7E9BBF15EEA12600C40515 /* BaseRPCClient+Invoke.h */ = {isa = PBXFileReference; fileEncoding = 4; path = "BaseRPCClient+Invoke.h"; sourceTree = "<group>"; };
-		3A7E9BC015EEA12600C40515 /* BaseRPCClient+Invoke.m */ = {isa = PBXFileReference; fileEncoding = 4; path = "BaseRPCClient+Invoke.m"; sourceTree = "<group>"; };
+		3A7E9BBF15EEA12600C40515 /* BaseRPCClient+Invoke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BaseRPCClient+Invoke.h"; sourceTree = "<group>"; };
+		3A7E9BC015EEA12600C40515 /* BaseRPCClient+Invoke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BaseRPCClient+Invoke.m"; sourceTree = "<group>"; };
 		3A7E9BC115EEA12600C40515 /* BaseRPCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRPCClient.h; sourceTree = "<group>"; };
 		3A7E9BC215EEA12600C40515 /* BaseRPCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRPCClient.m; sourceTree = "<group>"; };
+		3A7E9BC515EEA21F00C40515 /* JSONRPCClient+Invoke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JSONRPCClient+Invoke.h"; path = "RPC Client/Clients/JSON/JSONRPCClient+Invoke.h"; sourceTree = "<group>"; };
+		3A7E9BC615EEA21F00C40515 /* JSONRPCClient+Invoke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JSONRPCClient+Invoke.m"; path = "RPC Client/Clients/JSON/JSONRPCClient+Invoke.m"; sourceTree = "<group>"; };
 		3A9B621F15ED2CD2009A74FB /* objc-JSONRpc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "objc-JSONRpc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9B622315ED2CD2009A74FB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3A9B622515ED2CD2009A74FB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -70,10 +73,10 @@
 		3A7E9BBE15EEA12600C40515 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				3A7E9BBF15EEA12600C40515 /* BaseRPCClient+Invoke.h */,
-				3A7E9BC015EEA12600C40515 /* BaseRPCClient+Invoke.m */,
 				3A7E9BC115EEA12600C40515 /* BaseRPCClient.h */,
 				3A7E9BC215EEA12600C40515 /* BaseRPCClient.m */,
+				3A7E9BBF15EEA12600C40515 /* BaseRPCClient+Invoke.h */,
+				3A7E9BC015EEA12600C40515 /* BaseRPCClient+Invoke.m */,
 			);
 			name = Base;
 			path = "RPC Client/Clients/Base";
@@ -165,6 +168,8 @@
 			children = (
 				3A9B625515ED3FE1009A74FB /* JSONRPCClient.h */,
 				3A9B625615ED3FE1009A74FB /* JSONRPCClient.m */,
+				3A7E9BC515EEA21F00C40515 /* JSONRPCClient+Invoke.h */,
+				3A7E9BC615EEA21F00C40515 /* JSONRPCClient+Invoke.m */,
 			);
 			name = JSON;
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 				3A9B625F15ED4F8B009A74FB /* JSONKit.m in Sources */,
 				3A7E9BC315EEA12600C40515 /* BaseRPCClient+Invoke.m in Sources */,
 				3A7E9BC415EEA12600C40515 /* BaseRPCClient.m in Sources */,
+				3A7E9BC715EEA21F00C40515 /* JSONRPCClient+Invoke.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
