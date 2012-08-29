@@ -17,7 +17,7 @@ Follow these simple steps:
 * Add RPC Client folder from within this project to your project
 * #import "JSONRPCClient.h"
 * Start doing calls
-* 
+ 
 NB: Remove JSONKit either from this client or your project if you already uses it to avoid symbol conflicts.
 
 ```objective-c
