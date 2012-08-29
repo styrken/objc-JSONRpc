@@ -20,7 +20,7 @@
     
     if(self)
     {
-        self.version = @"2.0";
+        self.version = nil;
         self.method = nil;
         self.params = nil;
         self.id = nil;

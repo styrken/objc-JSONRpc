@@ -13,6 +13,8 @@
 
 - (NSData*) serializeRequest:(RPCRequest *)request error:(RPCError **) error
 {
+    request.version = @"2.0";
+    
     NSArray *methodKeys = nil;
     NSArray *methodObjs = nil;
     if (request.params)
