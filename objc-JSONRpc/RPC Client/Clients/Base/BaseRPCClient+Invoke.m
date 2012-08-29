@@ -8,7 +8,7 @@
 
 #import "BaseRPCClient+InvokeMethods.h"
 
-@implementation BaseRPCClient (InvokeMethods)
+@implementation BaseRPCClient (Invoke)
 
 - (NSString *) invoke:(RPCRequest*) request onCompleted:(RPCCompletedCallback)callback
 {

@@ -17,7 +17,7 @@ typedef void (^RPCFailedCallback)(RPCError *error);
  *
  *
  */
-@interface BaseRPCClient (InvokeMethods)
+@interface BaseRPCClient (Invoke)
 
 /**
  * Invokes a RPCRequest against the end point

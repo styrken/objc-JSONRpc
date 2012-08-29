@@ -7,7 +7,7 @@
 //
 
 #import "BaseRPCClient.h"
-#import "BaseRPCClient+InvokeMethods.h"
+#import "BaseRPCClient+Invoke.h"
 
 /**
  * JSON Rpc client. 
