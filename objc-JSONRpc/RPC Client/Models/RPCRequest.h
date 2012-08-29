@@ -14,6 +14,7 @@
  */
 @interface RPCRequest : NSObject
 
+#pragma mark - Properties -
 /**
  * The used RPC Version. NB: Only some RPC services (like JSON RPC) supports this.
  *
@@ -41,5 +42,15 @@
  * @param id
  */
 @property (nonatomic, retain) id params;
+
+#pragma mark - methods
+/**
+ * Helper method to get an autoreleased request object 
+ *
+ * @param NSString method The method that this request if for
+ * @param id params Some parameters to send along with the request, either named, un-named or nil
+ * @return RPCRequest (autoreleased)
+ */
++ (id) requestWithMethod:(NSString*) method params:(id) params;
 
 @end

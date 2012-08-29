@@ -29,6 +29,15 @@
     return self;
 }
 
++ (id) requestWithMethod:(NSString*) method params:(id) params
+{
+    RPCRequest *request = [[RPCRequest alloc] init];
+    request.method = method;
+    request.params = params;
+    
+    return [request autorelease];
+}
+
 - (void) dealloc
 {
     [_version release];
