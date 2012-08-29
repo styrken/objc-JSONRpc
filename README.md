@@ -32,9 +32,10 @@ NB: Remove JSONKit either from this client or your project if you already uses i
     [rpc release];
 ```
 
-Hope you figure out how it works :-)
-
 #### Invoking methods/requests
+
+These methods is public when you have an instance of the RPC Client.
+
 ```objective-c
 /**
  * Invokes a RPCRequest against the end point
