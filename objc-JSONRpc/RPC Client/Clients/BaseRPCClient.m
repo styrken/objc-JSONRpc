@@ -7,7 +7,6 @@
 //
 
 #import "BaseRPCClient.h"
-#import "BaseRPCClient+InvokeMethods.h"
 
 @implementation BaseRPCClient
 @synthesize serviceEndpoint = _serviceEndpoint;
