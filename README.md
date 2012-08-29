@@ -56,5 +56,17 @@ These methods is public when you have an instance of the RPC Client.
  * @return NSString The used request id. Can be used to match callback's if neccesary
  */
 - (NSString *) invoke:(NSString*) method params:(id) params  onCompleted:(RPCCompletedCallback)callback;
+
+/**
+ * Invokes a method against endpoint providing a way to define both a success callback and a failure callback.
+ *
+ * @param NSString method The method to invoke
+ * @param id Either named or un-named parameter list (or nil)
+ * @param RPCSuccessCallback A callback method to invoke when request finishes successfull
+ * @param RPCFailedCallback A callback method to invoke when request finishes with an error
+ * @return NSString The used request id. Can be used to match callback's if neccesary
+ */
+- (NSString *) invoke:(NSString*) method params:(id) params onSuccess:(RPCSuccessCallback)successCallback onFailure:(RPCFailedCallback)failedCallback;
+
 ```
 
