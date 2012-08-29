@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A7E9BC315EEA12600C40515 /* BaseRPCClient+InvokeMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E9BC015EEA12600C40515 /* BaseRPCClient+InvokeMethods.m */; };
+		3A7E9BC415EEA12600C40515 /* BaseRPCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7E9BC215EEA12600C40515 /* BaseRPCClient.m */; };
 		3A9B622415ED2CD2009A74FB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9B622315ED2CD2009A74FB /* UIKit.framework */; };
 		3A9B622615ED2CD2009A74FB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9B622515ED2CD2009A74FB /* Foundation.framework */; };
 		3A9B622815ED2CD2009A74FB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9B622715ED2CD2009A74FB /* CoreGraphics.framework */; };
@@ -16,15 +18,17 @@
 		3A9B624615ED3010009A74FB /* RPCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B624515ED3010009A74FB /* RPCRequest.m */; };
 		3A9B624915ED3021009A74FB /* RPCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B624815ED3021009A74FB /* RPCError.m */; };
 		3A9B624C15ED3030009A74FB /* RPCResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B624B15ED3030009A74FB /* RPCResponse.m */; };
-		3A9B624F15ED3048009A74FB /* BaseRPCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B624E15ED3048009A74FB /* BaseRPCClient.m */; };
 		3A9B625715ED3FE1009A74FB /* JSONRPCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B625615ED3FE1009A74FB /* JSONRPCClient.m */; };
 		3A9B625E15ED4F8B009A74FB /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B625A15ED4F8B009A74FB /* CHANGELOG.md */; };
 		3A9B625F15ED4F8B009A74FB /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B625C15ED4F8B009A74FB /* JSONKit.m */; };
 		3A9B626015ED4F8B009A74FB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B625D15ED4F8B009A74FB /* README.md */; };
-		3B088E7A15EE1A76005020DC /* BaseRPCClient+InvokeMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B088E7915EE1A76005020DC /* BaseRPCClient+InvokeMethods.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A7E9BBF15EEA12600C40515 /* BaseRPCClient+InvokeMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BaseRPCClient+InvokeMethods.h"; sourceTree = "<group>"; };
+		3A7E9BC015EEA12600C40515 /* BaseRPCClient+InvokeMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BaseRPCClient+InvokeMethods.m"; sourceTree = "<group>"; };
+		3A7E9BC115EEA12600C40515 /* BaseRPCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRPCClient.h; sourceTree = "<group>"; };
+		3A7E9BC215EEA12600C40515 /* BaseRPCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRPCClient.m; sourceTree = "<group>"; };
 		3A9B621F15ED2CD2009A74FB /* objc-JSONRpc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "objc-JSONRpc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9B622315ED2CD2009A74FB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3A9B622515ED2CD2009A74FB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -41,16 +45,12 @@
 		3A9B624815ED3021009A74FB /* RPCError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPCError.m; path = "RPC Client/Models/RPCError.m"; sourceTree = "<group>"; };
 		3A9B624A15ED3030009A74FB /* RPCResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPCResponse.h; path = "RPC Client/Models/RPCResponse.h"; sourceTree = "<group>"; };
 		3A9B624B15ED3030009A74FB /* RPCResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPCResponse.m; path = "RPC Client/Models/RPCResponse.m"; sourceTree = "<group>"; };
-		3A9B624D15ED3048009A74FB /* BaseRPCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseRPCClient.h; path = "RPC Client/Clients/BaseRPCClient.h"; sourceTree = "<group>"; };
-		3A9B624E15ED3048009A74FB /* BaseRPCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseRPCClient.m; path = "RPC Client/Clients/BaseRPCClient.m"; sourceTree = "<group>"; };
 		3A9B625515ED3FE1009A74FB /* JSONRPCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONRPCClient.h; path = "RPC Client/Clients/JSON/JSONRPCClient.h"; sourceTree = "<group>"; };
 		3A9B625615ED3FE1009A74FB /* JSONRPCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONRPCClient.m; path = "RPC Client/Clients/JSON/JSONRPCClient.m"; sourceTree = "<group>"; };
 		3A9B625A15ED4F8B009A74FB /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
 		3A9B625B15ED4F8B009A74FB /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		3A9B625C15ED4F8B009A74FB /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		3A9B625D15ED4F8B009A74FB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		3B088E7815EE1A76005020DC /* BaseRPCClient+InvokeMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BaseRPCClient+InvokeMethods.h"; path = "Invoke/BaseRPCClient+InvokeMethods.h"; sourceTree = "<group>"; };
-		3B088E7915EE1A76005020DC /* BaseRPCClient+InvokeMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "BaseRPCClient+InvokeMethods.m"; path = "Invoke/BaseRPCClient+InvokeMethods.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +67,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A7E9BBE15EEA12600C40515 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				3A7E9BBF15EEA12600C40515 /* BaseRPCClient+InvokeMethods.h */,
+				3A7E9BC015EEA12600C40515 /* BaseRPCClient+InvokeMethods.m */,
+				3A7E9BC115EEA12600C40515 /* BaseRPCClient.h */,
+				3A7E9BC215EEA12600C40515 /* BaseRPCClient.m */,
+			);
+			name = Base;
+			path = "RPC Client/Clients/Base";
+			sourceTree = "<group>";
+		};
 		3A9B621415ED2CD2009A74FB = {
 			isa = PBXGroup;
 			children = (
@@ -129,7 +141,7 @@
 		3A9B623C15ED2F48009A74FB /* Clients */ = {
 			isa = PBXGroup;
 			children = (
-				3B088E7615EE19E7005020DC /* Base */,
+				3A7E9BBE15EEA12600C40515 /* Base */,
 				3A9B625415ED3FA5009A74FB /* JSON */,
 			);
 			name = Clients;
@@ -160,7 +172,6 @@
 		3A9B625815ED4F8B009A74FB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				3B088E7715EE19F2005020DC /* Invoke */,
 				3A9B625915ED4F8B009A74FB /* JSONKit */,
 			);
 			name = Helpers;
@@ -176,24 +187,6 @@
 				3A9B625C15ED4F8B009A74FB /* JSONKit.m */,
 			);
 			path = JSONKit;
-			sourceTree = "<group>";
-		};
-		3B088E7615EE19E7005020DC /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				3A9B624D15ED3048009A74FB /* BaseRPCClient.h */,
-				3A9B624E15ED3048009A74FB /* BaseRPCClient.m */,
-			);
-			name = Base;
-			sourceTree = "<group>";
-		};
-		3B088E7715EE19F2005020DC /* Invoke */ = {
-			isa = PBXGroup;
-			children = (
-				3B088E7815EE1A76005020DC /* BaseRPCClient+InvokeMethods.h */,
-				3B088E7915EE1A76005020DC /* BaseRPCClient+InvokeMethods.m */,
-			);
-			name = Invoke;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,10 +258,10 @@
 				3A9B624615ED3010009A74FB /* RPCRequest.m in Sources */,
 				3A9B624915ED3021009A74FB /* RPCError.m in Sources */,
 				3A9B624C15ED3030009A74FB /* RPCResponse.m in Sources */,
-				3A9B624F15ED3048009A74FB /* BaseRPCClient.m in Sources */,
 				3A9B625715ED3FE1009A74FB /* JSONRPCClient.m in Sources */,
 				3A9B625F15ED4F8B009A74FB /* JSONKit.m in Sources */,
-				3B088E7A15EE1A76005020DC /* BaseRPCClient+InvokeMethods.m in Sources */,
+				3A7E9BC315EEA12600C40515 /* BaseRPCClient+InvokeMethods.m in Sources */,
+				3A7E9BC415EEA12600C40515 /* BaseRPCClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
