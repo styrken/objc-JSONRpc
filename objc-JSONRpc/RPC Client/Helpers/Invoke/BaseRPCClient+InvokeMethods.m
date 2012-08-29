@@ -36,7 +36,7 @@
         NSURLConnection *serviceEndpointConnection = [[NSURLConnection alloc] initWithRequest:serviceRequest delegate:self];
         
         [self.connections setObject:response forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
-        [self.callbacks setObject:callback forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
+        [self.callbacks setObject:[callback copy] forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
     }
     
     [response release];
@@ -54,5 +54,15 @@
     return [self invoke:[request autorelease] onCompleted:callback];
 }
 
+- (NSString *) invoke:(NSString*) method params:(id) params onSuccess:(RPCSuccessCallback)successCallback onFailure:(RPCFailedCallback)failedCallback
+{
+    return [self invoke:method params:params onCompleted:^(RPCResponse *response) {
+
+        if(response.error)
+            failedCallback(response.error);
+        else
+            successCallback(response);
+    }];
+}
 
 @end

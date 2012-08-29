@@ -12,6 +12,7 @@
 #import "RPCResponse.h"
 #import "RPCError.h"
 
+// Default callback type
 typedef void (^RPCCompletedCallback)(RPCResponse *response);
 
 /**

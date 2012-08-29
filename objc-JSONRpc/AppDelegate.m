@@ -35,6 +35,19 @@
         
     }];
     
+    [rpc invoke:@"getClientWatches" params:nil onSuccess:^(RPCResponse *response) {
+        
+        NSLog(@"Respone: %@", response);
+        NSLog(@"Result: %@", response.result);
+                                    
+                                    
+     } onFailure:^(RPCError *error) {
+                                    
+        NSLog(@"Error: %@", error);
+         
+    }];
+    
+    
     [rpc release];
     
     
