@@ -34,5 +34,25 @@ NB: Remove JSONKit either from this client or your project if you already uses i
 
 Hope you figure out how it works :-)
 
+#### Invoking methods/requests
+```objective-c
+/**
+ * Invokes a RPCRequest against the end point
+ *
+ * @param RPCRequest reqeust The request to invoke
+ * @param RPCCompletedCallback A callback method to invoke when request is done (or any error accours)
+ * @return NSString The used request id. Can be used to match callback's if neccesary
+ */
+- (NSString *) invoke:(RPCRequest*) request onCompleted:(RPCCompletedCallback)callback;
 
+/**
+ * Invokes a method against the end point
+ *
+ * @param NSString method The method to invoke
+ * @param id Either named or un-named parameter list (or nil)
+ * @param RPCCompletedCallback A callback method to invoke when request is done (or any error accours)
+ * @return NSString The used request id. Can be used to match callback's if neccesary
+ */
+- (NSString *) invoke:(NSString*) method params:(id) params  onCompleted:(RPCCompletedCallback)callback;
+```
 
