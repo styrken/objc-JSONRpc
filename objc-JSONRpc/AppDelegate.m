@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "RPCJSONClient.h"
+#import "JSONRPCClient.h"
 
 @implementation AppDelegate
 
@@ -26,7 +26,7 @@
     
     
     // RPC Test
-    RPCJSONClient *rpc = [[RPCJSONClient alloc] initWithServiceEndpoint:@"http://weatherwatchapp.com/api/index.php"];
+    JSONRPCClient *rpc = [[JSONRPCClient alloc] initWithServiceEndpoint:@"http://weatherwatchapp.com/api/index.php"];
     [rpc invoke:@"updateClientWatch" params:nil onCompleted:^(RPCResponse *response) {
         
         NSLog(@"Respone: %@", response);

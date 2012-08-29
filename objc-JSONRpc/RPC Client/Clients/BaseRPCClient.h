@@ -16,13 +16,13 @@ typedef void (^RPCCompletedCallback)(RPCResponse *response);
 
 /**
  * This is the RPC Client base class. 
- * It provides methods to invoke methods against the server but it cannot parse and handle data
- * directly with an RPC server. This is what subclasses a for.
+ * It provides means to communicate with the RPC server but cannot actually parse/understand requests and responses.
+ * This is what subclasses like the JSONRPCClient is for.
  *
- * F.example the RPCJSONClient handles JSON RPC's just fine.
+ * F.example the JSONRPCClient handles JSON RPC's just fine.
  *
  */
-@interface RPCBaseClient : NSObject <NSURLConnectionDataDelegate, NSURLConnectionDelegate>
+@interface BaseRPCClient : NSObject <NSURLConnectionDataDelegate, NSURLConnectionDelegate>
 
 #pragma mark - Properties -
 /**
@@ -54,32 +54,13 @@ typedef void (^RPCCompletedCallback)(RPCResponse *response);
  */
 - (id) initWithServiceEndpoint:(NSString*) endpoint;
 
-/**
- * Invokes a RPCRequest against the end point
- *
- * @param RPCRequest reqeust The request to invoke
- * @param RPCCompletedCallback A callback method to invoke when request is done (or any error accours)
- * @return NSString The used request id. Can be used to match callback's if neccesary
- */
-- (NSString *) invoke:(RPCRequest*) request onCompleted:(RPCCompletedCallback)callback;
-
-/**
- * Invokes a method against the end point
- *
- * @param NSString method The method to invoke
- * @param id Either named or un-named parameter list (or nil)
- * @param RPCCompletedCallback A callback method to invoke when request is done (or any error accours)
- * @return NSString The used request id. Can be used to match callback's if neccesary
- */
-- (NSString *) invoke:(NSString*) method params:(id) params  onCompleted:(RPCCompletedCallback)callback;
-
 @end
 
 /**
  * These methods needs to be impleted by subclasses to use the RPC Base Client
  *
  */
-@interface RPCBaseClient ()
+@interface BaseRPCClient ()
 /**
  * Serializes a request to anything that can be send over http post, if anything fails one must set error
  *

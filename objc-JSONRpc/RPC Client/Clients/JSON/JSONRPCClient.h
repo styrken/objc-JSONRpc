@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 Rasmus Styrk. All rights reserved.
 //
 
-#import "RPCBaseClient.h"
+#import "BaseRPCClient.h"
 
 /**
  * JSON Rpc client. 
  *
  * Handles parsing of json data
  */
-@interface RPCJSONClient : RPCBaseClient
+@interface JSONRPCClient : BaseRPCClient
 
 @end

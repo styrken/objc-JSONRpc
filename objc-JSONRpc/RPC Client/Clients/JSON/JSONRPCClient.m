@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 Rasmus Styrk. All rights reserved.
 //
 
-#import "RPCJSONClient.h"
+#import "JSONRPCClient.h"
 #import "JSONKit.h"
 
-@implementation RPCJSONClient
+@implementation JSONRPCClient
 
 - (NSData*) serializeRequest:(RPCRequest *)request error:(RPCError **) error
 {
