@@ -8,6 +8,7 @@ An objective-c 2.0 JSON RPC Client. Currently only supports json rpc version 2.0
 * Test calls with parameters
 * Add multicall support
 * Add more invoke methods
+* Add notification support
 
 
 How-To
