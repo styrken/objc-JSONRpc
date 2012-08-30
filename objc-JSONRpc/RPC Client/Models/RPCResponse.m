@@ -21,7 +21,7 @@
     
     if(self)
     {
-        self.version = @"2.0";
+        self.version = nil;
         self.error = nil;
         self.data = [[[NSMutableData alloc] init] autorelease];
         self.result = nil;
