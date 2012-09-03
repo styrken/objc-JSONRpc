@@ -10,4 +10,19 @@
 
 @implementation JSONRPCClient (Notification)
 
+- (void) notify:(NSString *)method params:(id)params
+{
+    RPCRequest *request = [[RPCRequest alloc] init];
+    request.method = method;
+    request.params = params;
+    request.id = @"";
+    
+    [self invoke:[request autorelease] onCompleted:nil];
+}
+
+- (void) notify:(NSString *)method
+{
+    [self notify:method params:nil];
+}
+
 @end

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "JSONRPCClient.h"
+#import "JSONRPCClient+Notification.h" // To allow use of notifications
 
 @implementation AppDelegate
 
@@ -23,7 +24,6 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
     
     // RPC Test
     JSONRPCClient *rpc = [[JSONRPCClient alloc] initWithServiceEndpoint:@"http://weatherwatchapp.com/api/index.php"];
@@ -47,8 +47,11 @@
          
     }];
     
+    [rpc notify:@"helloWorld"];
     
     [rpc release];
+    
+    
     
     
     return YES;
