@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Rasmus Styrk. All rights reserved.
 //
 
-#import "JSONRPCClient+Invoke.h"
+#import "JSONRPCClient+Multicall.h"
 
-@implementation JSONRPCClient (Invoke)
+@implementation JSONRPCClient (Multicall)
 
 @end

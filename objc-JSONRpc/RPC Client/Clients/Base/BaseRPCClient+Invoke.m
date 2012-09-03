@@ -38,7 +38,7 @@
         [self.connections setObject:response forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
         [self.callbacks setObject:[callback copy] forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
     }
-    
+        
     [response release];
     [callback release];
     
