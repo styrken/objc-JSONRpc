@@ -70,9 +70,9 @@ These methods is public when you have an instance of the RPC Client.
 
 ```
 
-#### Invoking noticiations
+#### Invoking notifications
 
-You need to ````#import "JSONRPCClient+Notification.h"```` to add noticiation support to the JSONRPCClient. These methods are added to the class as a category.
+You need to ````#import "JSONRPCClient+Notification.h"```` to add notification support to the JSONRPCClient. These methods are added to the class as a category.
 
 ````objective-c
 
