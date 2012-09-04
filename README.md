@@ -92,7 +92,7 @@ You need to ````#import "JSONRPCClient+Notification.h"```` to add notification s
 - (void) notify:(NSString *)method params:(id)params;
 ````
 
-## Example of a notification
+##### Example of a notification
 
 This could be used to keep a session alive on a webserver
 
