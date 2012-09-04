@@ -12,16 +12,13 @@
 
 - (NSString *) invoke:(RPCRequest*) request onCompleted:(RPCCompletedCallback)callback
 {
-    if(request.id == nil)
-        request.id = [[NSNumber numberWithInt:arc4random()] stringValue];
-    
     RPCResponse *response = [[RPCResponse alloc] init];
     response.id = request.id;
     
     RPCError *error = nil;
     NSData *payload = [self serializeRequest:request error:&error];
-    
-    if(error != nil && (response.error = error))
+        
+    if(callback != nil && error != nil && (response.error = error))
         callback(response);
     else
     {
@@ -36,7 +33,9 @@
         NSURLConnection *serviceEndpointConnection = [[NSURLConnection alloc] initWithRequest:serviceRequest delegate:self];
         
         [self.connections setObject:response forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
-        [self.callbacks setObject:[callback copy] forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
+        
+        if(callback != nil)
+            [self.callbacks setObject:[callback copy] forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
     }
         
     [response release];
@@ -50,6 +49,9 @@
     RPCRequest *request = [[RPCRequest alloc] init];
     request.method = method;
     request.params = params;
+    
+    if(request.id == nil)
+        request.id = [[NSNumber numberWithInt:arc4random()] stringValue];
     
     return [self invoke:[request autorelease] onCompleted:callback];
 }
