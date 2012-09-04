@@ -90,3 +90,14 @@ You need to ````#import "JSONRPCClient+Notification.h"```` to add notification s
  * @param id Either named or un-named parameter list (or nil)
  */
 - (void) notify:(NSString *)method params:(id)params;
+````
+
+## Example of a notification
+
+This could be used to keep a session alive on a webserver
+
+````objective-c
+  JSONRPCClient *rpc = [[JSONRPCClient alloc] initWithServiceEndpoint:@"..."];
+  [rpc notify:@"keepAlive"];
+  [rpc release];
+````
