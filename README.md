@@ -72,7 +72,7 @@ These methods is public when you have an instance of the RPC Client.
 
 #### Invoking noticiations
 
-You need to ````objective-c#import "JSONRPCClient+Notification.h"```` to add Noticiation support to the JSONRPCClient.
+You need to ````objective-c #import "JSONRPCClient+Notification.h"```` to add Noticiation support to the JSONRPCClient.
 
 ````objective-c
 
