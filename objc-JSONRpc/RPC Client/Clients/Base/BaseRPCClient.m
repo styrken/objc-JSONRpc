@@ -90,6 +90,10 @@
 {
     RPCResponse *rpcresponse = [self.connections objectForKey: [NSNumber numberWithInt:(int)connection]];
     RPCCompletedCallback callback = [self.callbacks objectForKey: [NSNumber numberWithInt:(int)connection]];
+ 
+    NSString *test = [[NSString alloc] initWithData:rpcresponse.data encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"String: %@", test);
     
     RPCError *error = nil;
     id result = [self parseResult:rpcresponse.data error:&error];
@@ -102,7 +106,8 @@
         rpcresponse.result = result;
     }
         
-    callback(rpcresponse);
+    if(callback)
+        callback(rpcresponse);
     
     [self.connections removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
     [self.callbacks removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
@@ -115,7 +120,9 @@
     RPCCompletedCallback callback = [self.callbacks objectForKey: [NSNumber numberWithInt:(int)connection]];
         
     rpcresponse.error = [RPCError errorWithCode:RPCNetworkError];
-    callback(rpcresponse);
+    
+    if(callback)
+        callback(rpcresponse);
     
     [self.connections removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
     [self.callbacks removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
