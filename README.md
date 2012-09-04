@@ -8,7 +8,6 @@ An objective-c 2.0 JSON RPC Client. Currently only supports json rpc version 2.0
 * Test calls with parameters
 * Add multicall support
 * Add more invoke methods
-* Add notification support
 
 
 How-To
@@ -71,3 +70,23 @@ These methods is public when you have an instance of the RPC Client.
 
 ```
 
+#### Invoking noticiations
+
+You need to ````objective-c#import "JSONRPCClient+Notification.h"```` to add Noticiation support to the JSONRPCClient.
+
+````objective-c
+
+/**
+ * Sends a notification to json rpc server.
+ *
+ * @param NSString method Method to call
+ */
+- (void) notify:(NSString *)method;
+
+/**
+ * Sends a notification to json rpc server.
+ *
+ * @param NSString method Method to call
+ * @param id Either named or un-named parameter list (or nil)
+ */
+- (void) notify:(NSString *)method params:(id)params;
