@@ -15,22 +15,26 @@
 {
     request.version = @"2.0";
     
-    NSArray *methodKeys = nil;
-    NSArray *methodObjs = nil;
-    if (request.params)
-    {
-        methodKeys = [NSArray arrayWithObjects:@"jsonrpc", @"method", @"params", @"id", nil];
-        methodObjs = [NSArray arrayWithObjects:request.version, request.method, request.params, request.id, nil];
-    }
-    else {
-        methodKeys = [NSArray arrayWithObjects:@"jsonrpc", @"method", @"id", nil];
-        methodObjs = [NSArray arrayWithObjects:request.version, request.method, request.id, nil];
-    }
+    NSMutableDictionary *payload = [[NSMutableDictionary alloc] init];
     
-    NSDictionary *payload = [NSDictionary dictionaryWithObjects:methodObjs forKeys:methodKeys];
+    if(request.version)
+        [payload setObject:request.version forKey:@"jsonrpc"];
+    
+    if(request.method)
+        [payload setObject:request.method forKey:@"method"];
+    
+    if(request.params)
+        [payload setObject:request.params forKey:@"params"];
+    
+    if(request.id != nil && request.id.length > 0)
+        [payload setObject:request.id forKey:@"id"];
+    
+    
+    NSLog(@"payload: %@", payload);
     
     NSError *jsonError;
     NSData *data = [payload JSONDataWithOptions:JKSerializeOptionNone error:&jsonError];
+    [payload release];
     
     if(jsonError != nil)
         *error = [RPCError errorWithCode:RPCParseError];

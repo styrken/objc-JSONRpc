@@ -15,7 +15,6 @@
     RPCRequest *request = [[RPCRequest alloc] init];
     request.method = method;
     request.params = params;
-    request.id = @"";
     
     [self invoke:[request autorelease] onCompleted:nil];
 }
