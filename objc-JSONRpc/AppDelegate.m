@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "JSONRPCClient.h"
-#import "JSONRPCClient+Invoke.h"
+#import "JSONRPCClient+Invoke.h" // To allow use of invokes 
 #import "JSONRPCClient+Notification.h" // To allow use of notifications
 
 @implementation AppDelegate

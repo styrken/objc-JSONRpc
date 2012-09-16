@@ -18,11 +18,10 @@ typedef void (^RPCCompletedCallback)(RPCResponse *response);
 typedef void (^RPCSuccessCallback)(RPCResponse *response);
 typedef void (^RPCFailedCallback)(RPCError *error);
 
-
 /**
  * This is the RPC Client base class.
- * It provides means to communicate with the RPC server but cannot actually parse/understand requests and responses.
- *
+ * It provides means to communicate with the RPC server and is responsible of serializing/parsing requests
+ * that is send and recieved.
  *
  */
 @interface JSONRPCClient : NSObject <NSURLConnectionDataDelegate, NSURLConnectionDelegate>
@@ -34,13 +33,11 @@ typedef void (^RPCFailedCallback)(RPCError *error);
  */
 @property (nonatomic, retain) NSString *serviceEndpoint;
 
-
 /**
  * Currently actively running connection
  *
  */
 @property (nonatomic, retain) NSMutableDictionary *connections;
-
 
 /**
  * All the callback that can be executed is added to this statck
