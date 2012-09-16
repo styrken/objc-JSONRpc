@@ -7,6 +7,7 @@
 //
 
 #import "JSONRPCClient+Notification.h"
+#import "JSONRPCClient+Invoke.h"
 
 @implementation JSONRPCClient (Notification)
 
