@@ -8,14 +8,6 @@
 
 #import "JSONRPCClient.h"
 
-
-// Default callback type
-typedef void (^RPCCompletedCallback)(RPCResponse *response);
-
-// Few other callback types (default RPCCompletedCallback is defined inside BaseRPCClient.h)
-typedef void (^RPCSuccessCallback)(RPCResponse *response);
-typedef void (^RPCFailedCallback)(RPCError *error);
-
 /**
  * This category class adds invoking of methods to the base RPC Class.
  *

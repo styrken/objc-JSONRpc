@@ -94,4 +94,62 @@
     return @"application/json";
 }
 
+#pragma mark - URL Connection delegates -
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    RPCResponse *rpcresponse = [self.connections objectForKey: [NSNumber numberWithInt:(int)connection]];
+    [rpcresponse.data setLength:0];
+}
+
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    RPCResponse *rpcresponse = [self.connections objectForKey: [NSNumber numberWithInt:(int)connection]];
+    [rpcresponse.data appendData:data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    RPCResponse *rpcresponse = [self.connections objectForKey: [NSNumber numberWithInt:(int)connection]];
+    RPCCompletedCallback callback = [self.callbacks objectForKey: [NSNumber numberWithInt:(int)connection]];
+    
+    NSString *test = [[NSString alloc] initWithData:rpcresponse.data encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"String: %@", test);
+    
+    RPCError *error = nil;
+    id result = [self parseResult:rpcresponse.data error:&error];
+    
+    if(error != nil)
+        rpcresponse.error = error;
+    else
+    {
+        rpcresponse.error = nil;
+        rpcresponse.result = result;
+    }
+    
+    if(callback)
+        callback(rpcresponse);
+    
+    [self.connections removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
+    [self.callbacks removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
+    [connection release];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    RPCResponse *rpcresponse = [self.connections objectForKey: [NSNumber numberWithInt:(int)connection]];
+    RPCCompletedCallback callback = [self.callbacks objectForKey: [NSNumber numberWithInt:(int)connection]];
+    
+    rpcresponse.error = [RPCError errorWithCode:RPCNetworkError];
+    
+    if(callback)
+        callback(rpcresponse);
+    
+    [self.connections removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
+    [self.callbacks removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
+    [connection release];
+}
+
 @end

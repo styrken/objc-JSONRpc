@@ -11,6 +11,14 @@
 #import "RPCError.h"
 #import "RPCResponse.h"
 
+// Default callback type
+typedef void (^RPCCompletedCallback)(RPCResponse *response);
+
+// Few other callback types (default RPCCompletedCallback is defined inside BaseRPCClient.h)
+typedef void (^RPCSuccessCallback)(RPCResponse *response);
+typedef void (^RPCFailedCallback)(RPCError *error);
+
+
 /**
  * This is the RPC Client base class.
  * It provides means to communicate with the RPC server but cannot actually parse/understand requests and responses.
