@@ -1,14 +1,14 @@
 //
-//  BaseRPCClient+InvokeMethods.m
+//  JSONRPCClient+Invoke.m
 //  objc-JSONRpc
 //
-//  Created by Rasmus Styrk on 29/08/12.
+//  Created by Rasmus Styrk on 9/16/12.
 //  Copyright (c) 2012 Rasmus Styrk. All rights reserved.
 //
 
-#import "BaseRPCClient+Invoke.h"
+#import "JSONRPCClient+Invoke.h"
 
-@implementation BaseRPCClient (Invoke)
+@implementation JSONRPCClient (Invoke)
 
 - (NSString *) invoke:(RPCRequest*) request onCompleted:(RPCCompletedCallback)callback
 {
@@ -17,7 +17,7 @@
     
     RPCError *error = nil;
     NSData *payload = [self serializeRequest:request error:&error];
-        
+    
     if(callback != nil && error != nil && (response.error = error))
         callback(response);
     else
@@ -37,7 +37,7 @@
         if(callback != nil)
             [self.callbacks setObject:[callback copy] forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
     }
-        
+    
     [response release];
     [callback release];
     
@@ -59,12 +59,11 @@
 - (NSString *) invoke:(NSString*) method params:(id) params onSuccess:(RPCSuccessCallback)successCallback onFailure:(RPCFailedCallback)failedCallback
 {
     return [self invoke:method params:params onCompleted:^(RPCResponse *response) {
-
+        
         if(response.error)
             failedCallback(response.error);
         else
             successCallback(response);
     }];
 }
-
 @end

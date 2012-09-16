@@ -11,6 +11,34 @@
 
 @implementation JSONRPCClient
 
+@synthesize serviceEndpoint = _serviceEndpoint;
+@synthesize connections = _connections;
+@synthesize callbacks = _callbacks;
+
+- (id) initWithServiceEndpoint:(NSString*) endpoint
+{
+    self = [super init];
+    
+    if(self)
+    {
+        self.serviceEndpoint = endpoint;
+        self.connections = [[[NSMutableDictionary alloc] init] autorelease];
+        self.callbacks = [[[NSMutableDictionary alloc] init] autorelease];
+    }
+    
+    return self;
+}
+
+- (void) dealloc
+{
+    [_serviceEndpoint release];
+    [_connections release];
+    [_callbacks release];
+    
+    [super dealloc];
+}
+
+
 - (NSData*) serializeRequest:(RPCRequest *)request error:(RPCError **) error
 {
     request.version = @"2.0";

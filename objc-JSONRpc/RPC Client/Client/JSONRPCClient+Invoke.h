@@ -1,12 +1,16 @@
 //
-//  BaseRPCClient+InvokeMethods.h
+//  JSONRPCClient+Invoke.h
 //  objc-JSONRpc
 //
-//  Created by Rasmus Styrk on 29/08/12.
+//  Created by Rasmus Styrk on 9/16/12.
 //  Copyright (c) 2012 Rasmus Styrk. All rights reserved.
 //
 
-#import "BaseRPCClient.h"
+#import "JSONRPCClient.h"
+
+
+// Default callback type
+typedef void (^RPCCompletedCallback)(RPCResponse *response);
 
 // Few other callback types (default RPCCompletedCallback is defined inside BaseRPCClient.h)
 typedef void (^RPCSuccessCallback)(RPCResponse *response);
@@ -17,7 +21,7 @@ typedef void (^RPCFailedCallback)(RPCError *error);
  *
  *
  */
-@interface BaseRPCClient (Invoke)
+@interface JSONRPCClient (Invoke)
 
 /**
  * Invokes a RPCRequest against the end point

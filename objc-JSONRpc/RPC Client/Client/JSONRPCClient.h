@@ -1,5 +1,5 @@
 //
-//  RPCBaseClient.h
+//  RPCJSONClient.h
 //  objc-JSONRpc
 //
 //  Created by Rasmus Styrk on 8/28/12.
@@ -7,23 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import "RPCRequest.h"
-#import "RPCResponse.h"
 #import "RPCError.h"
-
-// Default callback type
-typedef void (^RPCCompletedCallback)(RPCResponse *response);
+#import "RPCResponse.h"
 
 /**
- * This is the RPC Client base class. 
+ * This is the RPC Client base class.
  * It provides means to communicate with the RPC server but cannot actually parse/understand requests and responses.
- * This is what subclasses like the JSONRPCClient is for.
  *
- * F.example the JSONRPCClient handles JSON RPC's just fine.
  *
  */
-@interface BaseRPCClient : NSObject <NSURLConnectionDataDelegate, NSURLConnectionDelegate>
+@interface JSONRPCClient : NSObject <NSURLConnectionDataDelegate, NSURLConnectionDelegate>
 
 #pragma mark - Properties -
 /**
@@ -55,13 +49,6 @@ typedef void (^RPCCompletedCallback)(RPCResponse *response);
  */
 - (id) initWithServiceEndpoint:(NSString*) endpoint;
 
-@end
-
-/**
- * These methods needs to be impleted by subclasses to use the RPC Base Client
- *
- */
-@interface BaseRPCClient ()
 /**
  * Serializes a request to anything that can be send over http post, if anything fails one must set error
  *
@@ -86,4 +73,6 @@ typedef void (^RPCCompletedCallback)(RPCResponse *response);
  * @return NSString
  */
 - (NSString*) contentType;
+
+
 @end
