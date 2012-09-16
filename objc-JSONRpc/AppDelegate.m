@@ -53,7 +53,7 @@
     [rpc release];
     
     
-    
+    self.window.rootViewController = [[[UIViewController alloc] init] autorelease];
     
     return YES;
 }
