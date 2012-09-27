@@ -11,10 +11,15 @@
 @implementation JSONRPCClient (Multicall)
 
 
-
-
-
-
-
+- (void) batch:(RPCRequest*) request, ...
+{
+    va_list args;
+    va_start(args, request);
+    
+    // Do stuff with all the requests! If only one request, call standard invoke method
+    
+    
+    va_end(args);
+}
 
 @end

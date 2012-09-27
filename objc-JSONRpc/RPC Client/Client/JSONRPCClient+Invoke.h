@@ -23,10 +23,9 @@ typedef void (^RPCFailedCallback)(RPCError *error);
  * Invokes a RPCRequest against the end point
  *
  * @param RPCRequest reqeust The request to invoke
- * @param RPCCompletedCallback A callback method to invoke when request is done (or any error accours)
  * @return NSString The used request id. Can be used to match callback's if neccesary
  */
-- (NSString *) invoke:(RPCRequest*) request onCompleted:(RPCRequestCallback)callback;
+- (NSString *) invoke:(RPCRequest*) request;
 
 /**
  * Invokes a method against the end point

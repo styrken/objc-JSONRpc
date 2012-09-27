@@ -17,7 +17,7 @@
     request.method = method;
     request.params = params;
     
-    [self invoke:[request autorelease] onCompleted:nil];
+    [self invoke:[request autorelease]];
 }
 
 - (void) notify:(NSString *)method

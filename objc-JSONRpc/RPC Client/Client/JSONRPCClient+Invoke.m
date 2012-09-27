@@ -10,15 +10,13 @@
 
 @implementation JSONRPCClient (Invoke)
 
-- (NSString *) invoke:(RPCRequest*) request onCompleted:(RPCRequestCallback)callback
-{
-    request.callback =  callback;
-    
+- (NSString *) invoke:(RPCRequest*) request
+{    
     RPCError *error = nil;
     NSData *payload = [self serializeRequest:request error:&error];
     
-    if(callback != nil && error != nil)
-        callback([RPCResponse responseWithError:error]);
+    if(request.callback != nil && error != nil)
+        request.callback([RPCResponse responseWithError:error]);
     else
     {
         NSMutableURLRequest *serviceRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.serviceEndpoint]];
@@ -37,9 +35,7 @@
 
         [serviceRequest release];
     }
-    
-    [callback release];
-    
+        
     return request.id;
 }
 
@@ -48,11 +44,12 @@
     RPCRequest *request = [[RPCRequest alloc] init];
     request.method = method;
     request.params = params;
+    request.callback = callback;
     
     if(request.id == nil)
         request.id = [[NSNumber numberWithInt:arc4random()] stringValue];
     
-    return [self invoke:[request autorelease] onCompleted:callback];
+    return [self invoke:[request autorelease]];
 }
 
 - (NSString *) invoke:(NSString*) method params:(id) params onSuccess:(RPCSuccessCallback)successCallback onFailure:(RPCFailedCallback)failedCallback
