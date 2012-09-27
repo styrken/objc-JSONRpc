@@ -9,7 +9,9 @@
 #import "JSONRPCClient.h"
 
 /**
- * Implements a way to use notifications in json rpc client. 
+ * Notificiation
+ *
+ * - Implements a way to use notifications in json rpc client. 
  *
  * Its important to understand that notifications does not  * allow using callbacks and therefor you 
  * need to make sure you call your server in the right way since there is no telling if * your notification was 

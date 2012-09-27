@@ -12,9 +12,9 @@
 @synthesize version = _version;
 @synthesize method = _method;
 @synthesize params = _params;
-@synthesize id = _id;
 @synthesize callback = _callback;
 @synthesize data = _data;
+@synthesize id = _id;
 
 - (id) init
 {

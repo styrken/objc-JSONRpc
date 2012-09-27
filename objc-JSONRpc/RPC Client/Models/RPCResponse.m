@@ -11,7 +11,6 @@
 @implementation RPCResponse
 @synthesize version = _version;
 @synthesize error = _error;
-@synthesize data = _data;
 @synthesize result = _result;
 @synthesize id = _id;
 
@@ -23,7 +22,6 @@
     {
         self.version = nil;
         self.error = nil;
-        self.data = [[[NSMutableData alloc] init] autorelease];
         self.result = nil;
         self.id = nil;
     }
@@ -43,7 +41,6 @@
 {
     [_version release];
     [_error release];
-    [_data release];
     [_result release];
     [_id release];
     [super dealloc];

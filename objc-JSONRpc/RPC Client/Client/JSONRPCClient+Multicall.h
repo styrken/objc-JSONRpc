@@ -9,8 +9,9 @@
 #import "JSONRPCClient.h"
 
 /**
- * This category adds specific JSON multicall invoking
+ * Multicall
  *
+ * - Adds invoking of multicalls to the remote server through the jsonrpcclient class
  */
 @interface JSONRPCClient (Multicall)
 

@@ -39,13 +39,6 @@
 @property (nonatomic, retain) RPCError *error;
 
 /**
- * The data passed back from the server in raw NSData format
- *
- * @param NSMuteableData
- */
-@property (nonatomic, retain) NSMutableData *data;
-
-/**
  * An object represneting the result from the method on the server
  * 
  * @param id
@@ -55,6 +48,12 @@
 
 #pragma mark - Methods
 
+/**
+ * Helper method to get an autoreleased RPCResponse object with an error set
+ *
+ * @param RPCError error The error for the response
+ * @return RPCRequest
+ */
 + (id) responseWithError:(RPCError*)error;
 
 @end

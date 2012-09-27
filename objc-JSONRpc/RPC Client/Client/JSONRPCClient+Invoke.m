@@ -22,7 +22,7 @@
     else
     {
         NSMutableURLRequest *serviceRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.serviceEndpoint]];
-        [serviceRequest setValue:[self contentType] forHTTPHeaderField:@"Content-Type"];
+        [serviceRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         [serviceRequest setValue:@"objc-JSONRpc/1.0" forHTTPHeaderField:@"User-Agent"];
         
         [serviceRequest setValue:[NSString stringWithFormat:@"%i", payload.length] forHTTPHeaderField:@"Content-Length"];

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+// Reserved rpc errors
 typedef enum {
     RPCParseError = -32700,
     RPCInvalidRequest = -32600,

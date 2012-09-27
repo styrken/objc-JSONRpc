@@ -12,10 +12,12 @@
 #import "RPCResponse.h"
 
 /**
- * This is the RPC Client base class.
- * It provides means to communicate with the RPC server and is responsible of serializing/parsing requests
+ * JSONRPCClient
+ *
+ * Provides means to communicate with the RPC server and is responsible of serializing/parsing requests
  * that is send and recieved.
  *
+ * Retains requests while they are completing and manages calling of callback's.
  */
 @interface JSONRPCClient : NSObject <NSURLConnectionDataDelegate, NSURLConnectionDelegate>
 
@@ -27,16 +29,9 @@
 @property (nonatomic, retain) NSString *serviceEndpoint;
 
 /**
- * Currently actively running connection
+ * All the reqeusts that can be executed is added to this statck
  *
  */
-@property (nonatomic, retain) NSMutableDictionary *connections;
-
-/**
- * All the callback that can be executed is added to this statck
- *
- */
-@property (nonatomic, retain) NSMutableDictionary *callbacks;
 @property (nonatomic, retain) NSMutableDictionary *requests;
 
 #pragma mark - Methods
@@ -65,13 +60,5 @@
  * @return id Any kind of objective-c object that matches data in NSData parameter
  */
 - (id) parseResult:(NSData*) data error:(RPCError **) error;
-
-/**
- * Should tell anything about the content-type that we send over http post request
- *
- * @return NSString
- */
-- (NSString*) contentType;
-
 
 @end

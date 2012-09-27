@@ -12,8 +12,6 @@
 @implementation JSONRPCClient
 
 @synthesize serviceEndpoint = _serviceEndpoint;
-@synthesize connections = _connections;
-@synthesize callbacks = _callbacks;
 @synthesize requests = _requests;
 
 - (id) initWithServiceEndpoint:(NSString*) endpoint
@@ -23,8 +21,6 @@
     if(self)
     {
         self.serviceEndpoint = endpoint;
-        self.connections = [[[NSMutableDictionary alloc] init] autorelease];
-        self.callbacks = [[[NSMutableDictionary alloc] init] autorelease];
         self.requests = [[[NSMutableDictionary alloc] init] autorelease];
     }
     
@@ -34,8 +30,6 @@
 - (void) dealloc
 {
     [_serviceEndpoint release];
-    [_connections release];
-    [_callbacks release];
     [_requests release];
     
     [super dealloc];
@@ -58,9 +52,6 @@
     
     if(request.id != nil && request.id.length > 0)
         [payload setObject:request.id forKey:@"id"];
-    
-    
-    NSLog(@"payload: %@", payload);
     
     NSError *jsonError;
     NSData *data = [payload JSONDataWithOptions:JKSerializeOptionNone error:&jsonError];
@@ -91,11 +82,6 @@
     return [jsonResult objectForKey:@"result"];
 }
 
-- (NSString*) contentType
-{
-    return @"application/json";
-}
-
 #pragma mark - URL Connection delegates -
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -103,7 +89,6 @@
     RPCRequest *request = [self.requests objectForKey:[NSNumber numberWithInt:(int)connection]];
     [request.data setLength:0];
 }
-
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {

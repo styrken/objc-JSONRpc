@@ -14,7 +14,10 @@
 typedef void (^RPCRequestCallback)(RPCResponse *response);
 
 /**
- * RPC Request object. Always used to invoke a request to an endpoint.
+ * RPC Request object. 
+ *
+ * Always used to invoke a request to an endpoint. Also contains data that
+ * was returned by server and it holds a callback block that should be called when the request is finished.
  *
  */
 @interface RPCRequest : NSObject
@@ -49,18 +52,18 @@ typedef void (^RPCRequestCallback)(RPCResponse *response);
 @property (nonatomic, retain) id params;
 
 /**
- * Callback to call whenever request is fininshed
- *
- * @param RPCRequestCallback
- */
-@property (nonatomic, copy) RPCRequestCallback callback;
-
-/**
  * The data passed back from the server in raw NSData format
  *
  * @param NSMuteableData
  */
 @property (nonatomic, retain) NSMutableData *data;
+
+/**
+ * Callback to call whenever request is fininshed
+ *
+ * @param RPCRequestCallback
+ */
+@property (nonatomic, copy) RPCRequestCallback callback;
 
 #pragma mark - methods
 /**
