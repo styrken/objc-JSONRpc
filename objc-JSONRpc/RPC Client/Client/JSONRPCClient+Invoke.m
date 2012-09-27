@@ -10,19 +10,18 @@
 
 @implementation JSONRPCClient (Invoke)
 
-- (NSString *) invoke:(RPCRequest*) request onCompleted:(RPCCompletedCallback)callback
+- (NSString *) invoke:(RPCRequest*) request onCompleted:(RPCRequestCallback)callback
 {
-    RPCResponse *response = [[RPCResponse alloc] init];
-    response.id = request.id;
+    request.callback =  callback;
     
     RPCError *error = nil;
     NSData *payload = [self serializeRequest:request error:&error];
     
-    if(callback != nil && error != nil && (response.error = error))
-        callback(response);
+    if(callback != nil && error != nil)
+        callback([RPCResponse responseWithError:error]);
     else
     {
-        NSMutableURLRequest *serviceRequest = [NSMutableURLRequest requestWithURL: [NSURL URLWithString:self.serviceEndpoint]];
+        NSMutableURLRequest *serviceRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.serviceEndpoint]];
         [serviceRequest setValue:[self contentType] forHTTPHeaderField:@"Content-Type"];
         [serviceRequest setValue:@"objc-JSONRpc/1.0" forHTTPHeaderField:@"User-Agent"];
         
@@ -30,21 +29,21 @@
         [serviceRequest setHTTPMethod:@"POST"];
         [serviceRequest setHTTPBody:payload];
         
+#ifndef __clang_analyzer__
         NSURLConnection *serviceEndpointConnection = [[NSURLConnection alloc] initWithRequest:serviceRequest delegate:self];
-        
-        [self.connections setObject:response forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
-        
-        if(callback != nil)
-            [self.callbacks setObject:[callback copy] forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
+#endif
+
+        [self.requests setObject:request forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
+
+        [serviceRequest release];
     }
     
-    [response release];
     [callback release];
     
     return request.id;
 }
 
-- (NSString *) invoke:(NSString *)method params:(id)params onCompleted:(RPCCompletedCallback)callback
+- (NSString *) invoke:(NSString *)method params:(id)params onCompleted:(RPCRequestCallback)callback
 {
     RPCRequest *request = [[RPCRequest alloc] init];
     request.method = method;

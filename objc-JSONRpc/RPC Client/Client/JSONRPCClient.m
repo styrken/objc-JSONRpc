@@ -14,6 +14,7 @@
 @synthesize serviceEndpoint = _serviceEndpoint;
 @synthesize connections = _connections;
 @synthesize callbacks = _callbacks;
+@synthesize requests = _requests;
 
 - (id) initWithServiceEndpoint:(NSString*) endpoint
 {
@@ -24,6 +25,7 @@
         self.serviceEndpoint = endpoint;
         self.connections = [[[NSMutableDictionary alloc] init] autorelease];
         self.callbacks = [[[NSMutableDictionary alloc] init] autorelease];
+        self.requests = [[[NSMutableDictionary alloc] init] autorelease];
     }
     
     return self;
@@ -34,10 +36,10 @@
     [_serviceEndpoint release];
     [_connections release];
     [_callbacks release];
+    [_requests release];
     
     [super dealloc];
 }
-
 
 - (NSData*) serializeRequest:(RPCRequest *)request error:(RPCError **) error
 {
@@ -98,58 +100,72 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    RPCResponse *rpcresponse = [self.connections objectForKey: [NSNumber numberWithInt:(int)connection]];
-    [rpcresponse.data setLength:0];
+    RPCRequest *request = [self.requests objectForKey:[NSNumber numberWithInt:(int)connection]];
+    [request.data setLength:0];
 }
 
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    RPCResponse *rpcresponse = [self.connections objectForKey: [NSNumber numberWithInt:(int)connection]];
-    [rpcresponse.data appendData:data];
+    RPCRequest *request = [self.requests objectForKey:[NSNumber numberWithInt:(int)connection]];
+    [request.data appendData:data];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    RPCResponse *rpcresponse = [self.connections objectForKey: [NSNumber numberWithInt:(int)connection]];
-    RPCCompletedCallback callback = [self.callbacks objectForKey: [NSNumber numberWithInt:(int)connection]];
-    
-    NSString *test = [[NSString alloc] initWithData:rpcresponse.data encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"String: %@", test);
+    RPCRequest *request = [self.requests objectForKey: [NSNumber numberWithInt:(int)connection]];
     
     RPCError *error = nil;
-    id result = [self parseResult:rpcresponse.data error:&error];
+    id result = [self parseResult:request.data error:&error];
     
+    RPCResponse *response = [[RPCResponse alloc] init];
+        
     if(error != nil)
-        rpcresponse.error = error;
+        response.error = error;
     else
     {
-        rpcresponse.error = nil;
-        rpcresponse.result = result;
+        response.error = nil;
+        response.result = result;
     }
     
-    if(callback)
-        callback(rpcresponse);
+    if(request.callback)
+        request.callback([response autorelease]);
+    else
+        [response release];
     
-    [self.connections removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
-    [self.callbacks removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
+    [self.requests removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
     [connection release];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    RPCResponse *rpcresponse = [self.connections objectForKey: [NSNumber numberWithInt:(int)connection]];
-    RPCCompletedCallback callback = [self.callbacks objectForKey: [NSNumber numberWithInt:(int)connection]];
+    RPCRequest *request = [self.requests objectForKey:[NSNumber numberWithInt:(int)connection]];
     
-    rpcresponse.error = [RPCError errorWithCode:RPCNetworkError];
+    RPCResponse *response = [[RPCResponse alloc] init];
+    response.error = [RPCError errorWithCode:RPCNetworkError];
     
-    if(callback)
-        callback(rpcresponse);
+    if(request.callback)
+        request.callback([response autorelease]);
+    else
+        [response release];
     
-    [self.connections removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
-    [self.callbacks removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
+    [self.requests removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
     [connection release];
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

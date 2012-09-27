@@ -8,6 +8,10 @@
 
 #import "JSONRPCClient.h"
 
+// Few other callback types (default RPCCompletedCallback is defined inside BaseRPCClient.h)
+typedef void (^RPCSuccessCallback)(RPCResponse *response);
+typedef void (^RPCFailedCallback)(RPCError *error);
+
 /**
  * This category class adds invoking of methods to the base RPC Class.
  *
@@ -22,7 +26,7 @@
  * @param RPCCompletedCallback A callback method to invoke when request is done (or any error accours)
  * @return NSString The used request id. Can be used to match callback's if neccesary
  */
-- (NSString *) invoke:(RPCRequest*) request onCompleted:(RPCCompletedCallback)callback;
+- (NSString *) invoke:(RPCRequest*) request onCompleted:(RPCRequestCallback)callback;
 
 /**
  * Invokes a method against the end point
@@ -32,7 +36,7 @@
  * @param RPCCompletedCallback A callback method to invoke when request is done (or any error accours)
  * @return NSString The used request id. Can be used to match callback's if neccesary
  */
-- (NSString *) invoke:(NSString*) method params:(id) params  onCompleted:(RPCCompletedCallback)callback;
+- (NSString *) invoke:(NSString*) method params:(id) params  onCompleted:(RPCRequestCallback)callback;
 
 /**
  * Invokes a method against endpoint providing a way to define both a success callback and a failure callback.

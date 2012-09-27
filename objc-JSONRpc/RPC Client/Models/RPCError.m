@@ -50,6 +50,7 @@
         
         case RPCMethodNotFound:
             message = @"Method not found";
+            break;
             
         case RPCNetworkError:
             message = @"Network error";

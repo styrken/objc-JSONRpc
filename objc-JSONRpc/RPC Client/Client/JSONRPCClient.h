@@ -11,13 +11,6 @@
 #import "RPCError.h"
 #import "RPCResponse.h"
 
-// Default callback type
-typedef void (^RPCCompletedCallback)(RPCResponse *response);
-
-// Few other callback types (default RPCCompletedCallback is defined inside BaseRPCClient.h)
-typedef void (^RPCSuccessCallback)(RPCResponse *response);
-typedef void (^RPCFailedCallback)(RPCError *error);
-
 /**
  * This is the RPC Client base class.
  * It provides means to communicate with the RPC server and is responsible of serializing/parsing requests
@@ -44,6 +37,7 @@ typedef void (^RPCFailedCallback)(RPCError *error);
  *
  */
 @property (nonatomic, retain) NSMutableDictionary *callbacks;
+@property (nonatomic, retain) NSMutableDictionary *requests;
 
 #pragma mark - Methods
 /**

@@ -13,6 +13,8 @@
 @synthesize method = _method;
 @synthesize params = _params;
 @synthesize id = _id;
+@synthesize callback = _callback;
+@synthesize data = _data;
 
 - (id) init
 {
@@ -24,6 +26,8 @@
         self.method = nil;
         self.params = nil;
         self.id = nil;
+        self.callback = nil;
+        self.data = [[[NSMutableData alloc] init] autorelease];
     }
     
     return self;
@@ -38,12 +42,24 @@
     return [request autorelease];
 }
 
++ (id) requestWithMethod:(NSString*) method params:(id) params callback:(RPCRequestCallback)callback
+{
+    RPCRequest *request = [[RPCRequest alloc] init];
+    request.method = method;
+    request.params = params;
+    request.callback = callback;
+    
+    return [request autorelease];
+}
+
 - (void) dealloc
 {
     [_version release];
     [_method release];
     [_params release];
     [_id release];
+    [_callback release];
+    [_data release];
     
     [super dealloc];
 }

@@ -52,4 +52,9 @@
  */
 @property (nonatomic, retain) id result;
 
+
+#pragma mark - Methods
+
++ (id) responseWithError:(RPCError*)error;
+
 @end

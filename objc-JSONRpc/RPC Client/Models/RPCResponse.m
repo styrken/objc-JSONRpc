@@ -31,6 +31,13 @@
     return self;
 }
 
++ (id) responseWithError:(RPCError*)error
+{
+    RPCResponse *response = [[RPCResponse alloc] init];
+    response.error = error;
+    
+    return [response autorelease];
+}
 
 - (void) dealloc
 {
