@@ -13,6 +13,7 @@
 
 @synthesize serviceEndpoint = _serviceEndpoint;
 @synthesize requests = _requests;
+@synthesize requestData = _requestData;
 
 - (id) initWithServiceEndpoint:(NSString*) endpoint
 {
@@ -22,6 +23,7 @@
     {
         self.serviceEndpoint = endpoint;
         self.requests = [[[NSMutableDictionary alloc] init] autorelease];
+        self.requestData = [[[NSMutableDictionary alloc] init] autorelease];
     }
     
     return self;
@@ -31,110 +33,118 @@
 {
     [_serviceEndpoint release];
     [_requests release];
+    [_requestData release];
     
     [super dealloc];
 }
 
-- (NSData*) serializeRequest:(RPCRequest *)request error:(RPCError **) error
-{
-    request.version = @"2.0";
-    
-    NSMutableDictionary *payload = [[NSMutableDictionary alloc] init];
-    
-    if(request.version)
-        [payload setObject:request.version forKey:@"jsonrpc"];
-    
-    if(request.method)
-        [payload setObject:request.method forKey:@"method"];
-    
-    if(request.params)
-        [payload setObject:request.params forKey:@"params"];
-    
-    if(request.id != nil && request.id.length > 0)
-        [payload setObject:request.id forKey:@"id"];
-    
-    NSError *jsonError;
-    NSData *data = [payload JSONDataWithOptions:JKSerializeOptionNone error:&jsonError];
-    [payload release];
-    
-    if(jsonError != nil)
-        *error = [RPCError errorWithCode:RPCParseError];
-    
-    return data;
-}
+#pragma mark - Handle result
 
-- (id) parseResult:(NSData*) data error:(RPCError **) error
+- (void) handleResult:(NSDictionary*)result
 {
-    NSError *jsonError = nil;
-    NSDictionary *jsonResult = [data objectFromJSONDataWithParseOptions:JKParseOptionNone error:&jsonError];
+    NSString *requestId = [result objectForKey:@"id"];
+    NSDictionary *error = [result objectForKey:@"error"];
+    NSString *version = [result objectForKey:@"version"];
     
-    if(jsonError != nil)
-        *error = [[RPCError alloc] initWithCode:RPCParseError];
-    else
+    if(requestId)
     {
-        NSDictionary *serverError = [jsonResult objectForKey:@"error"];
-        if(serverError != nil && [serverError isKindOfClass:[NSDictionary class]])
+        RPCRequest *request = [self.requests objectForKey:requestId];
+        
+        RPCResponse *response = [[RPCResponse alloc] init];
+        response.id = requestId;
+        response.version = version;
+        
+        if(error)
         {
-            *error = [[[RPCError alloc] initWithCode:[[serverError objectForKey:@"code"] intValue] message:[serverError objectForKey:@"message"] data:[serverError objectForKey:@"data"]] autorelease];
+            if(error != nil && [error isKindOfClass:[NSDictionary class]])
+            {
+                response.error = [[[RPCError alloc] initWithCode:[[error objectForKey:@"code"] intValue]
+                                                         message:[error objectForKey:@"message"]
+                                                            data:[error objectForKey:@"data"]] autorelease];
+            }
         }
+        else
+            response.result = [result objectForKey:@"result"];
+        
+        if(request.callback)
+            request.callback([response autorelease]);
+        
+        [self.requests removeObjectForKey:requestId];
     }
-    
-    return [jsonResult objectForKey:@"result"];
 }
 
 #pragma mark - URL Connection delegates -
 
+- (void) postData:(NSData*)data
+{
+    NSMutableURLRequest *serviceRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.serviceEndpoint]];
+    [serviceRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [serviceRequest setValue:@"objc-JSONRpc/1.0" forHTTPHeaderField:@"User-Agent"];
+    
+    [serviceRequest setValue:[NSString stringWithFormat:@"%i", data.length] forHTTPHeaderField:@"Content-Length"];
+    [serviceRequest setHTTPMethod:@"POST"];
+    [serviceRequest setHTTPBody:data];
+    
+#ifndef __clang_analyzer__
+    NSURLConnection *serviceEndpointConnection = [[NSURLConnection alloc] initWithRequest:serviceRequest delegate:self];
+#endif
+    
+    NSMutableData *rData = [[NSMutableData alloc] init];
+    [self.requestData setObject:rData forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
+    [rData release];
+    [serviceRequest release];
+}
+
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    RPCRequest *request = [self.requests objectForKey:[NSNumber numberWithInt:(int)connection]];
-    [request.data setLength:0];
+    NSMutableData *rdata = [self.requestData objectForKey: [NSNumber numberWithInt:(int)connection]];
+    [rdata setLength:0];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    RPCRequest *request = [self.requests objectForKey:[NSNumber numberWithInt:(int)connection]];
-    [request.data appendData:data];
+    NSMutableData *rdata = [self.requestData objectForKey: [NSNumber numberWithInt:(int)connection]];
+    [rdata appendData:data];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    RPCRequest *request = [self.requests objectForKey: [NSNumber numberWithInt:(int)connection]];
+    NSMutableData *data = [self.requestData objectForKey: [NSNumber numberWithInt:(int)connection]];
     
-    RPCError *error = nil;
-    id result = [self parseResult:request.data error:&error];
-    
-    RPCResponse *response = [[RPCResponse alloc] init];
-        
-    if(error != nil)
-        response.error = error;
-    else
+    if(data.length > 0)
     {
-        response.error = nil;
-        response.result = result;
+        NSError *jsonError = nil;
+        id result = [data objectFromJSONDataWithParseOptions:JKParseOptionNone error:&jsonError];
+        
+        if(jsonError != nil)
+            NSLog(@"%@", [[RPCError alloc] initWithCode:RPCParseError]);
+        else if(!result)
+            NSLog(@"%@", [RPCError errorWithCode:RPCServerError]);
+        else
+        {
+            // Single call
+            if([result isKindOfClass:[NSDictionary class]])
+                [self handleResult:result];
+            // Multicall
+            else if ([result isKindOfClass:[NSArray class]])
+            {
+                for(NSDictionary *r in result)
+                    [self handleResult:r];
+            }
+            else
+                NSLog(@"%@", [RPCError errorWithCode:RPCServerError]);
+        }
     }
-    
-    if(request.callback)
-        request.callback([response autorelease]);
-    else
-        [response release];
-    
-    [self.requests removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
+ 
+    [self.requestData removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
     [connection release];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    RPCRequest *request = [self.requests objectForKey:[NSNumber numberWithInt:(int)connection]];
+    NSLog(@"%@", [RPCError errorWithCode:RPCNetworkError]);
     
-    RPCResponse *response = [[RPCResponse alloc] init];
-    response.error = [RPCError errorWithCode:RPCNetworkError];
-    
-    if(request.callback)
-        request.callback([response autorelease]);
-    else
-        [response release];
-    
-    [self.requests removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
+    [self.requestData removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
     [connection release];
 }
 

@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "JSONRPCClient+Invoke.h" // To allow use of invokes 
 #import "JSONRPCClient+Notification.h" // To allow use of notifications
+#import "JSONRPCClient+Multicall.h" // Add multicall support
 
 @implementation AppDelegate
 
@@ -26,8 +27,9 @@
     [self.window makeKeyAndVisible];
     
     // RPC Test
-    JSONRPCClient *rpc = [[JSONRPCClient alloc] initWithServiceEndpoint:@"http://weatherwatchapp.com/api/index.php"];
-    [rpc invoke:@"updateClientWatch" params:nil onCompleted:^(RPCResponse *response) {
+    JSONRPCClient *rpc = [[JSONRPCClient alloc] initWithServiceEndpoint:@"http://..."];
+    
+    [rpc invoke:@"getAppleProductIdentifiers" params:nil onCompleted:^(RPCResponse *response) {
         
         NSLog(@"Respone: %@", response);
         NSLog(@"Error: %@", response.error);
@@ -35,7 +37,7 @@
         
     }];
     
-    [rpc invoke:@"getClientWatches" params:nil onSuccess:^(RPCResponse *response) {
+    [rpc invoke:@"validateAppleReceipt" params:nil onSuccess:^(RPCResponse *response) {
         
         NSLog(@"Respone: %@", response);
         NSLog(@"Result: %@", response.result);
@@ -48,6 +50,11 @@
     }];
     
     [rpc notify:@"helloWorld"];
+    
+    [rpc batch:[RPCRequest requestWithMethod:@"helloWorld" params:nil callback:^(RPCResponse *response) {
+        NSLog(@"Multicall Response is: %@", response);
+        
+    }], [RPCRequest requestWithMethod:@"helloWorld"], [RPCRequest requestWithMethod:@"helloWorld"], nil];
     
     [rpc release];
     

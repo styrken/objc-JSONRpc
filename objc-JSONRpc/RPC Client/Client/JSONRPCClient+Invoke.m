@@ -7,33 +7,23 @@
 //
 
 #import "JSONRPCClient+Invoke.h"
+#import "JSONKit.h"
 
 @implementation JSONRPCClient (Invoke)
 
 - (NSString *) invoke:(RPCRequest*) request
 {    
-    RPCError *error = nil;
-    NSData *payload = [self serializeRequest:request error:&error];
+    NSError *jsonError;
+    NSData *payload = [[request serialize] JSONDataWithOptions:JKSerializeOptionNone error:&jsonError];
     
-    if(request.callback != nil && error != nil)
-        request.callback([RPCResponse responseWithError:error]);
+    if(request.callback != nil && jsonError != nil)
+        request.callback([RPCError errorWithCode:RPCParseError]);
     else
     {
-        NSMutableURLRequest *serviceRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.serviceEndpoint]];
-        [serviceRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [serviceRequest setValue:@"objc-JSONRpc/1.0" forHTTPHeaderField:@"User-Agent"];
+        if(request.id)
+            [self.requests setObject:request forKey:request.id];
         
-        [serviceRequest setValue:[NSString stringWithFormat:@"%i", payload.length] forHTTPHeaderField:@"Content-Length"];
-        [serviceRequest setHTTPMethod:@"POST"];
-        [serviceRequest setHTTPBody:payload];
-        
-#ifndef __clang_analyzer__
-        NSURLConnection *serviceEndpointConnection = [[NSURLConnection alloc] initWithRequest:serviceRequest delegate:self];
-#endif
-
-        [self.requests setObject:request forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
-
-        [serviceRequest release];
+        [self postData:payload];
     }
         
     return request.id;
@@ -45,10 +35,7 @@
     request.method = method;
     request.params = params;
     request.callback = callback;
-    
-    if(request.id == nil)
-        request.id = [[NSNumber numberWithInt:arc4random()] stringValue];
-    
+            
     return [self invoke:[request autorelease]];
 }
 

@@ -33,6 +33,7 @@
  *
  */
 @property (nonatomic, retain) NSMutableDictionary *requests;
+@property (nonatomic, retain) NSMutableDictionary *requestData;
 
 #pragma mark - Methods
 /**
@@ -43,22 +44,6 @@
  */
 - (id) initWithServiceEndpoint:(NSString*) endpoint;
 
-/**
- * Serializes a request to anything that can be send over http post, if anything fails one must set error
- *
- * @param RPCRequest request The request to serialize
- * @param RPCError error If any error accours
- * @return NSData Serialized RPCRequest as NSData object
- */
-- (NSData*) serializeRequest:(RPCRequest*) request error:(RPCError **) error;
-
-/**
- * Parses the result from the server, must return some kind of objective-c object
- *
- * @param NSData data The data to parse
- * @param RPCError error If any error accours
- * @return id Any kind of objective-c object that matches data in NSData parameter
- */
-- (id) parseResult:(NSData*) data error:(RPCError **) error;
+- (void) postData:(NSData*)data;
 
 @end

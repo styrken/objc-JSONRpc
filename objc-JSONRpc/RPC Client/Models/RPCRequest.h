@@ -66,6 +66,21 @@ typedef void (^RPCRequestCallback)(RPCResponse *response);
 @property (nonatomic, copy) RPCRequestCallback callback;
 
 #pragma mark - methods
+
+/**
+ * Serialized requests object for json encodig
+ *
+ */
+- (NSMutableDictionary*) serialize;
+
+/**
+ * Helper method to get an autoreleased request object
+ *
+ * @param NSString method The method that this request if for
+ * @return RPCRequest (autoreleased)
+ */
++ (id) requestWithMethod:(NSString*) method;
+
 /**
  * Helper method to get an autoreleased request object 
  *

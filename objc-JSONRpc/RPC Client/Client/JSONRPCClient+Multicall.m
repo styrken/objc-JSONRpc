@@ -7,19 +7,60 @@
 //
 
 #import "JSONRPCClient+Multicall.h"
+#import "JSONRPCClient+Invoke.h"
+#import "JSONKit.h"
 
 @implementation JSONRPCClient (Multicall)
 
 
 - (void) batch:(RPCRequest*) request, ...
 {
-    va_list args;
-    va_start(args, request);
+    va_list argument_list;
     
-    // Do stuff with all the requests! If only one request, call standard invoke method
+    NSMutableArray *tmpRequests = [[NSMutableArray alloc] init];
     
+    if(request)
+        [tmpRequests addObject:request];
     
-    va_end(args);
+    va_start(argument_list, request);
+    
+    RPCRequest *r;
+    while((r = va_arg(argument_list, RPCRequest*)))
+        [tmpRequests addObject:r];
+    
+    va_end(argument_list);
+    
+    if(tmpRequests.count == 1)
+        [self invoke:[tmpRequests objectAtIndex:0]];
+    else
+    {
+        
+        NSLog(@"Number of requests: %i", tmpRequests.count);
+        
+        NSMutableArray *serializedRequests = [[NSMutableArray alloc] initWithCapacity:tmpRequests.count];
+        
+        for(RPCRequest *r in tmpRequests)
+            [serializedRequests addObject:[r serialize]];
+                
+        NSError *jsonError;
+        NSData *payload = [serializedRequests JSONDataWithOptions:JKSerializeOptionNone error:&jsonError];
+        [serializedRequests release];
+                
+        if(jsonError)
+            NSLog(@"%@", [RPCError errorWithCode:RPCParseError]);
+        else
+        {
+            for(RPCRequest *r in tmpRequests)
+            {
+                if(r.id)
+                    [self.requests setObject:r forKey:r.id];
+            }
+            
+            [self postData:payload];
+        }
+    }
+    
+    [tmpRequests release];
 }
 
 @end

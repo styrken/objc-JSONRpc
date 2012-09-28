@@ -16,6 +16,7 @@
     RPCRequest *request = [[RPCRequest alloc] init];
     request.method = method;
     request.params = params;
+    request.id = nil; // Id must be nil when sending notifications
     
     [self invoke:[request autorelease]];
 }
