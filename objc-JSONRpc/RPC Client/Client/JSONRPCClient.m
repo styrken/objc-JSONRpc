@@ -155,6 +155,7 @@
                     if([resultId isEqualToString:request.id])
                     {
                         [self handleResult:result forRequest:request];
+                        break;
                     }
                 }
             }
