@@ -34,9 +34,6 @@
         [self invoke:[tmpRequests objectAtIndex:0]];
     else
     {
-        
-        NSLog(@"Number of requests: %i", tmpRequests.count);
-        
         NSMutableArray *serializedRequests = [[NSMutableArray alloc] initWithCapacity:tmpRequests.count];
         
         for(RPCRequest *r in tmpRequests)
