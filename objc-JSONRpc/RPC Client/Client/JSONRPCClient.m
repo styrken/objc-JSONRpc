@@ -68,6 +68,8 @@
         
         if(request.callback)
             request.callback([response autorelease]);
+        else
+            [response release];
         
         [self.requests removeObjectForKey:requestId];
     }
