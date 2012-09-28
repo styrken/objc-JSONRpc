@@ -44,6 +44,6 @@
  */
 - (id) initWithServiceEndpoint:(NSString*) endpoint;
 
-- (void) postData:(NSData*)data;
+- (void) postRequests:(NSArray*)requests;
 
 @end

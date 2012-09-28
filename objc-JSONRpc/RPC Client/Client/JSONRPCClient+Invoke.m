@@ -12,20 +12,9 @@
 @implementation JSONRPCClient (Invoke)
 
 - (NSString *) invoke:(RPCRequest*) request
-{    
-    NSError *jsonError;
-    NSData *payload = [[request serialize] JSONDataWithOptions:JKSerializeOptionNone error:&jsonError];
-    
-    if(request.callback != nil && jsonError != nil)
-        request.callback([RPCError errorWithCode:RPCParseError]);
-    else
-    {
-        if(request.id)
-            [self.requests setObject:request forKey:request.id];
-        
-        [self postData:payload];
-    }
-        
+{
+    [self postRequests:[NSArray arrayWithObject:request]];
+
     return request.id;
 }
 
@@ -49,4 +38,5 @@
             successCallback(response);
     }];
 }
+
 @end

@@ -31,6 +31,7 @@
     
     [rpc invoke:@"getAppleProductIdentifiers" params:nil onCompleted:^(RPCResponse *response) {
         
+        NSLog(@"getAppleProductIdentifiers");
         NSLog(@"Respone: %@", response);
         NSLog(@"Error: %@", response.error);
         NSLog(@"Result: %@", response.result);
@@ -39,12 +40,14 @@
     
     [rpc invoke:@"validateAppleReceipt" params:nil onSuccess:^(RPCResponse *response) {
         
+        NSLog(@"validateAppleReceipt");
         NSLog(@"Respone: %@", response);
         NSLog(@"Result: %@", response.result);
                                     
                                     
      } onFailure:^(RPCError *error) {
-                                    
+         
+        NSLog(@"validateAppleReceipt");
         NSLog(@"Error: %@", error);
          
     }];
@@ -53,6 +56,7 @@
     
     [rpc batch:[RPCRequest requestWithMethod:@"helloWorld" params:nil callback:^(RPCResponse *response) {
         NSLog(@"Multicall Response is: %@", response);
+        NSLog(@"Multicall Response error: %@", response.error);
         
     }], [RPCRequest requestWithMethod:@"helloWorld"], [RPCRequest requestWithMethod:@"helloWorld"], nil];
     

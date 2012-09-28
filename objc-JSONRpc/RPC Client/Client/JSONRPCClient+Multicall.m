@@ -30,32 +30,8 @@
     
     va_end(argument_list);
     
-    if(tmpRequests.count == 1)
-        [self invoke:[tmpRequests objectAtIndex:0]];
-    else
-    {
-        NSMutableArray *serializedRequests = [[NSMutableArray alloc] initWithCapacity:tmpRequests.count];
-        
-        for(RPCRequest *r in tmpRequests)
-            [serializedRequests addObject:[r serialize]];
-                
-        NSError *jsonError;
-        NSData *payload = [serializedRequests JSONDataWithOptions:JKSerializeOptionNone error:&jsonError];
-        [serializedRequests release];
-                
-        if(jsonError)
-            NSLog(@"%@", [RPCError errorWithCode:RPCParseError]);
-        else
-        {
-            for(RPCRequest *r in tmpRequests)
-            {
-                if(r.id)
-                    [self.requests setObject:r forKey:r.id];
-            }
-            
-            [self postData:payload];
-        }
-    }
+    if(tmpRequests.count > 0 )
+        [self postRequests:tmpRequests];
     
     [tmpRequests release];
 }
