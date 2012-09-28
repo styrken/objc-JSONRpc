@@ -38,7 +38,7 @@
     [super dealloc];
 }
 
-#pragma mark - Handle result
+#pragma mark - Helpers
 
 - (void) handleResult:(NSDictionary*)result forRequest:(RPCRequest*)request
 {
@@ -70,8 +70,6 @@
             [response release];
     }
 }
-
-#pragma mark - URL Connection delegates -
 
 - (void) postRequests:(NSArray*)requests
 {
@@ -113,6 +111,8 @@
         [serviceRequest release];
     }
 }
+
+#pragma mark - URL Connection delegates -
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
