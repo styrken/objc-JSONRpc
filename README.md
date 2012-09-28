@@ -5,10 +5,6 @@ An objective-c 2.0 JSON RPC Client. Currently only supports json rpc version 2.0
 
 #### Todo:
 * Support ARC (might be a problem since JSONKit does not support ARC at the moment)
-* Test calls with parameters
-* Add multicall support
-* Add more invoke methods
-
 
 How-To
 -------------------------
