@@ -52,13 +52,6 @@ typedef void (^RPCRequestCallback)(RPCResponse *response);
 @property (nonatomic, retain) id params;
 
 /**
- * The data passed back from the server in raw NSData format
- *
- * @param NSMuteableData
- */
-@property (nonatomic, retain) NSMutableData *data;
-
-/**
  * Callback to call whenever request is fininshed
  *
  * @param RPCRequestCallback

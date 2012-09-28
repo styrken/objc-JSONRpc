@@ -13,7 +13,6 @@
 @synthesize method = _method;
 @synthesize params = _params;
 @synthesize callback = _callback;
-@synthesize data = _data;
 @synthesize id = _id;
 
 - (id) init
@@ -26,7 +25,6 @@
         self.method = nil;
         self.params = nil;
         self.callback = nil;
-        self.data = [[[NSMutableData alloc] init] autorelease];
         
         self.id = [[NSNumber numberWithInt:arc4random()] stringValue];
     }
@@ -84,7 +82,6 @@
     [_params release];
     [_id release];
     [_callback release];
-    [_data release];
     
     [super dealloc];
 }
