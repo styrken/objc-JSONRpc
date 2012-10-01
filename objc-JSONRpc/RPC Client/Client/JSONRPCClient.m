@@ -40,37 +40,6 @@
 
 #pragma mark - Helpers
 
-- (void) handleResult:(NSDictionary*)result forRequest:(RPCRequest*)request
-{
-    NSString *requestId = [result objectForKey:@"id"];
-    NSDictionary *error = [result objectForKey:@"error"];
-    NSString *version = [result objectForKey:@"version"];
-    
-    if(requestId)
-    {
-        RPCResponse *response = [[RPCResponse alloc] init];
-        response.id = requestId;
-        response.version = version;
-        
-        if(error)
-        {
-            if(error != nil && [error isKindOfClass:[NSDictionary class]])
-            {
-                response.error = [[[RPCError alloc] initWithCode:[[error objectForKey:@"code"] intValue]
-                                                         message:[error objectForKey:@"message"]
-                                                            data:[error objectForKey:@"data"]] autorelease];
-            }
-        }
-        else
-            response.result = [result objectForKey:@"result"];
-        
-        if(request.callback)
-            request.callback([response autorelease]);
-        else
-            [response release];
-    }
-}
-
 - (void) postRequests:(NSArray*)requests
 {
     NSMutableArray *serializedRequests = [[NSMutableArray alloc] initWithCapacity:requests.count];
@@ -130,34 +99,48 @@
 {
     NSMutableData *data = [self.requestData objectForKey: [NSNumber numberWithInt:(int)connection]];
     NSArray *requests = [self.requests objectForKey: [NSNumber numberWithInt:(int)connection]];
+
+    NSError *jsonError = nil;
+    id results = [data objectFromJSONDataWithParseOptions:JKParseOptionNone error:&jsonError];
     
-    if(data.length > 0)
+    for(RPCRequest *request in requests)
     {
-        NSError *jsonError = nil;
-        id results = [data objectFromJSONDataWithParseOptions:JKParseOptionNone error:&jsonError];
+        if(request.callback == nil)
+            continue;
         
-        for(RPCRequest *request in requests)
+        if(data.length == 0)
+            request.callback([RPCResponse responseWithError:[RPCError errorWithCode:RPCServerError]]);
+        else if(jsonError)
+            request.callback([RPCResponse responseWithError:[RPCError errorWithCode:RPCParseError]]);
+        else
         {
-            if(jsonError != nil)
+            for(NSDictionary *result in results)
             {
-                if(request.callback)
-                    request.callback([RPCResponse responseWithError:[RPCError errorWithCode:RPCParseError]]);
-            }
-            else
-            {
-                for(NSDictionary *result in results)
+                NSString *requestId = [result objectForKey:@"id"];
+                
+                if([requestId isEqualToString:request.id])
                 {
-                    NSString *resultId = [result objectForKey:@"id"];
+                    NSDictionary *error = [result objectForKey:@"error"];
+                    NSString *version = [result objectForKey:@"version"];
                     
-                    if([resultId isEqualToString:request.id])
-                    {
-                        [self handleResult:result forRequest:request];
-                        break;
-                    }
+                    RPCResponse *response = [[RPCResponse alloc] init];
+                    response.id = requestId;
+                    response.version = version;
+                    
+                    if(error && [error isKindOfClass:[NSDictionary class]])
+                        response.error = [RPCError errorWithDictionary:error];
+                    else
+                        response.result = [result objectForKey:@"result"];
+                    
+                    request.callback(response);
+                    
+                    [response release];
+                    break;
                 }
             }
         }
     }
+    
  
     [self.requestData removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
     [self.requests removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
@@ -170,8 +153,10 @@
     
     for(RPCRequest *request in requests)
     {
-        if(request.callback)
-            request.callback([RPCResponse responseWithError:[RPCError errorWithCode:RPCNetworkError]]);
+        if(request.callback == nil)
+            continue;
+        
+        request.callback([RPCResponse responseWithError:[RPCError errorWithCode:RPCNetworkError]]);
     }
     
     [self.requestData removeObjectForKey: [NSNumber numberWithInt:(int)connection]];

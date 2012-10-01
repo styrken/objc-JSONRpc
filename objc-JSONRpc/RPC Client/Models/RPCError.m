@@ -70,6 +70,13 @@
     return [[[RPCError alloc] initWithCode:code] autorelease];
 }
 
++ (id) errorWithDictionary:(NSDictionary*) error
+{
+    return [[[RPCError alloc] initWithCode:[[error objectForKey:@"code"] intValue]
+                                   message:[error objectForKey:@"message"]
+                                      data:[error objectForKey:@"data"]] autorelease];
+}
+
 - (void) dealloc
 {
     [_message release];

@@ -56,5 +56,6 @@ typedef enum {
 - (id) initWithCode:(RPCErrorCode) code;
 - (id) initWithCode:(RPCErrorCode) code message:(NSString*) message data:(id)data;
 + (id) errorWithCode:(RPCErrorCode) code;
++ (id) errorWithDictionary:(NSDictionary*) error;
 
 @end
