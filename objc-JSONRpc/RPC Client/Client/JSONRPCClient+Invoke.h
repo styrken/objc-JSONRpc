@@ -20,7 +20,7 @@ typedef void (^RPCFailedCallback)(RPCError *error);
 @interface JSONRPCClient (Invoke)
 
 /**
- * Invokes a RPCRequest against the end point
+ * Invokes a RPCRequest against the end point.
  *
  * @param RPCRequest reqeust The request to invoke
  * @return NSString The used request id. Can be used to match callback's if neccesary
@@ -28,7 +28,7 @@ typedef void (^RPCFailedCallback)(RPCError *error);
 - (NSString *) invoke:(RPCRequest*) request;
 
 /**
- * Invokes a method against the end point
+ * Invokes a method against the end point. This method actually generates an RPCRequest object and calls invoke:request
  *
  * @param NSString method The method to invoke
  * @param id Either named or un-named parameter list (or nil)
@@ -40,6 +40,8 @@ typedef void (^RPCFailedCallback)(RPCError *error);
 /**
  * Invokes a method against endpoint providing a way to define both a success callback and a failure callback.
  *
+ * This method simply wraps invoke:method:params:onCompleted
+ * 
  * @param NSString method The method to invoke
  * @param id Either named or un-named parameter list (or nil)
  * @param RPCSuccessCallback A callback method to invoke when request finishes successfull
