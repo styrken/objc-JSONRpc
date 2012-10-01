@@ -22,28 +22,36 @@ typedef enum {
 
 /**
  * RPCError.
- *
- * If any error accours this object will be passed around with a code, a message and maybe! some data (if the server supports it)
- *
+ * 
+ * Simple object containing information about errors. Erros can be generated serverside or internally within this client.
+ * See RPCErrorCode above for the most common errors.
  */
 @interface RPCError : NSObject
 
 #pragma mark - Properties -
+
 /**
- * RPC Error code. Simpe enough?
+ * RPC Error code. Error code that you can match against the RPCErrorCode enum above. 
+ * 
+ * Server can generate other errors aswell, for a description of server errors you need to contact server
+ * administrator ;-)
  *
  * @param RPCErrorCode
  */
 @property (nonatomic, readonly) RPCErrorCode code;
 
 /**
- * RPC Error message - just in plain english
+ * RPC Error message
+ * 
+ * A more detailed message describing the error. 
  *
  * @param NSString
  */
 @property (nonatomic, readonly, retain) NSString *message;
 
 /**
+ * Some random data
+ * 
  * If the server supports sending debug data when server errors accours, it will be stored here
  *
  * @param id
