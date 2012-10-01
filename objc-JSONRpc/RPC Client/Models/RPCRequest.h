@@ -16,8 +16,7 @@ typedef void (^RPCRequestCallback)(RPCResponse *response);
 /**
  * RPC Request object. 
  *
- * Always used to invoke a request to an endpoint. Contains information about the request that you send to a server.
- * This object is kept alive untill the request is finished.
+ * Always used to invoke a request to an endpoint. 
  */
 @interface RPCRequest : NSObject
 
