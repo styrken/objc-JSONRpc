@@ -12,20 +12,19 @@
 /**
  * RPC Resposne object
  *
- * This object is returned when server responds or if errors accours
- *
+ * This object is created when the server responds. 
  */
 @interface RPCResponse : NSObject
 
 /**
- * The used RPC Version. NB: Only some RPC services (like JSON RPC) supports this.
+ * The used RPC Version. 
  *
  * @param NSString
  */
 @property (nonatomic, retain) NSString *version;
 
 /**
- * The id that was used in the request. Can be used to match response objects
+ * The id that was used in the request.
  *
  * @param NSString
  */
