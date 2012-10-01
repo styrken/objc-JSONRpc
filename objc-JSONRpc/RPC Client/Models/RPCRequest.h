@@ -16,29 +16,30 @@ typedef void (^RPCRequestCallback)(RPCResponse *response);
 /**
  * RPC Request object. 
  *
- * Always used to invoke a request to an endpoint. Also contains data that
- * was returned by server and it holds a callback block that should be called when the request is finished.
- *
+ * Always used to invoke a request to an endpoint. Contains information about the request that you send to a server.
+ * This object is kept alive untill the request is finished.
  */
 @interface RPCRequest : NSObject
 
 #pragma mark - Properties -
+
 /**
- * The used RPC Version. NB: Only some RPC services (like JSON RPC) supports this.
+ * The used RPC Version. 
+ * This client only supports version 2.0 at the moment.
  *
  * @param NSString
  */
 @property (nonatomic, retain) NSString *version;
 
 /**
- * The id that was used in the request. Can be used to match response objects
+ * The id that was used in the request. If id is nil the request is treated like an  notification.
  *
  * @param NSString
  */
 @property (nonatomic, retain) NSString *id;
 
 /**
- * Method to call at the RPC Server
+ * Method to call at the RPC Server.
  *
  * @param NSString 
  */
