@@ -136,17 +136,14 @@
         NSError *jsonError = nil;
         id results = [data objectFromJSONDataWithParseOptions:JKParseOptionNone error:&jsonError];
         
-        if(jsonError != nil)
+        for(RPCRequest *request in requests)
         {
-            for(RPCRequest *request in requests)
+            if(jsonError != nil)
             {
                 if(request.callback)
                     request.callback([RPCResponse responseWithError:[RPCError errorWithCode:RPCParseError]]);
             }
-        }
-        else
-        {
-            for(RPCRequest *request in requests)
+            else
             {
                 for(NSDictionary *result in results)
                 {
