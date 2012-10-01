@@ -140,7 +140,6 @@
             }
         }
     }
-    
  
     [self.requestData removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
     [self.requests removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
