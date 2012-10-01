@@ -15,6 +15,12 @@
  */
 @interface JSONRPCClient (Multicall)
 
+/**
+ * Sends  batch of RPCRequest objects to the server. The call to this method must be nil terminated.
+ * 
+ * @param RPCRequest request The first request to send
+ * @param ...A list of RPCRequest objects to send, must be nil terminated
+ */
 - (void) batch:(RPCRequest*) request, ...;
 
 @end
