@@ -81,6 +81,30 @@
     }
 }
 
+- (void) handleResult:(NSDictionary*) result forRequest:(RPCRequest*)request
+{
+    if(!request.callback)
+        return;
+    
+    NSString *requestId = [result objectForKey:@"id"];
+    
+    NSDictionary *error = [result objectForKey:@"error"];
+    NSString *version = [result objectForKey:@"version"];
+    
+    RPCResponse *response = [[RPCResponse alloc] init];
+    response.id = requestId;
+    response.version = version;
+    
+    if(error && [error isKindOfClass:[NSDictionary class]])
+        response.error = [RPCError errorWithDictionary:error];
+    else
+        response.result = [result objectForKey:@"result"];
+    
+    request.callback(response);
+    
+    [response release];
+}
+
 #pragma mark - URL Connection delegates -
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -112,7 +136,9 @@
             request.callback([RPCResponse responseWithError:[RPCError errorWithCode:RPCServerError]]);
         else if(jsonError)
             request.callback([RPCResponse responseWithError:[RPCError errorWithCode:RPCParseError]]);
-        else
+        else if([results isKindOfClass:[NSDictionary class]])
+            [self handleResult:results forRequest:request];
+        else if([results isKindOfClass:[NSArray class]])
         {
             for(NSDictionary *result in results)
             {
@@ -120,21 +146,7 @@
                 
                 if([requestId isEqualToString:request.id])
                 {
-                    NSDictionary *error = [result objectForKey:@"error"];
-                    NSString *version = [result objectForKey:@"version"];
-                    
-                    RPCResponse *response = [[RPCResponse alloc] init];
-                    response.id = requestId;
-                    response.version = version;
-                    
-                    if(error && [error isKindOfClass:[NSDictionary class]])
-                        response.error = [RPCError errorWithDictionary:error];
-                    else
-                        response.result = [result objectForKey:@"result"];
-                    
-                    request.callback(response);
-                    
-                    [response release];
+                    [self handleResult:result forRequest:request];
                     break;
                 }
             }
