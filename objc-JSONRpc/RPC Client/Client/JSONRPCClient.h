@@ -24,23 +24,21 @@
 @interface JSONRPCClient : NSObject <NSURLConnectionDataDelegate, NSURLConnectionDelegate>
 
 #pragma mark - Properties -
+
 /**
  * What service endpoint we talk to. Just a simple string containing an URL. 
  * It will later be converted to an NSURL Object, so anything that NSURL Supports
- * is valid
- *
+ * is valid-
  */
 @property (nonatomic, retain) NSString *serviceEndpoint;
 
 /**
  * All the reqeusts that is being executed is added to this statck
- *
  */
 @property (nonatomic, retain) NSMutableDictionary *requests;
 
 /**
  * All returned data from the server is saved into this dictionary for later processing
- * 
  */
 @property (nonatomic, retain) NSMutableDictionary *requestData;
 
