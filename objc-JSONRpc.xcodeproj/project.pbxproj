@@ -121,6 +121,7 @@
 		3BE8984B161ACF0600AEB2CD /* jsonrpc-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jsonrpc-Prefix.pch"; sourceTree = "<group>"; };
 		3BE8984C161ACF0600AEB2CD /* jsonrpc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jsonrpc.h; sourceTree = "<group>"; };
 		3BE8984E161ACF0600AEB2CD /* jsonrpc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jsonrpc.m; sourceTree = "<group>"; };
+		3BF5DC79161B216A00428FA7 /* FixCategoryBug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FixCategoryBug.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				3A9B625915ED4F8B009A74FB /* JSONKit */,
+				3BF5DC79161B216A00428FA7 /* FixCategoryBug.h */,
 			);
 			name = Helpers;
 			path = "RPC Client/Helpers";

@@ -10,7 +10,9 @@
 #import "JSONRPCClient+Invoke.h"
 #import "JSONKit.h"
 
-STATIC_CATEGORY(JSONRPCClient_Multicall)
+#import "FixCategoryBug.h"
+
+FIX_CATEGORY_BUG(JSONRPCClient_Multicall)
 @implementation JSONRPCClient (Multicall)
 
 - (void) batch:(RPCRequest*) request, ...
