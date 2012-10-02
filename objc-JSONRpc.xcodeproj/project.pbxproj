@@ -23,7 +23,45 @@
 		3A9B625E15ED4F8B009A74FB /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B625A15ED4F8B009A74FB /* CHANGELOG.md */; };
 		3A9B625F15ED4F8B009A74FB /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B625C15ED4F8B009A74FB /* JSONKit.m */; };
 		3A9B626015ED4F8B009A74FB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B625D15ED4F8B009A74FB /* README.md */; };
+		3BE89848161ACF0600AEB2CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9B622515ED2CD2009A74FB /* Foundation.framework */; };
+		3BE8984D161ACF0600AEB2CD /* jsonrpc.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3BE8984C161ACF0600AEB2CD /* jsonrpc.h */; };
+		3BE8984F161ACF0600AEB2CD /* jsonrpc.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8984E161ACF0600AEB2CD /* jsonrpc.m */; };
+		3BE89854161ACF3A00AEB2CD /* RPCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B624515ED3010009A74FB /* RPCRequest.m */; };
+		3BE89855161ACF3B00AEB2CD /* RPCResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B624B15ED3030009A74FB /* RPCResponse.m */; };
+		3BE89856161ACF3D00AEB2CD /* RPCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B624815ED3021009A74FB /* RPCError.m */; };
+		3BE89857161ACF4000AEB2CD /* JSONRPCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A210B771606786D003DBBF1 /* JSONRPCClient.m */; };
+		3BE89858161ACF4200AEB2CD /* JSONRPCClient+Invoke.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A210B791606786D003DBBF1 /* JSONRPCClient+Invoke.m */; };
+		3BE89859161ACF4400AEB2CD /* JSONRPCClient+Multicall.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A210B7B1606786D003DBBF1 /* JSONRPCClient+Multicall.m */; };
+		3BE8985A161ACF4600AEB2CD /* JSONRPCClient+Notification.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A210B7D1606786D003DBBF1 /* JSONRPCClient+Notification.m */; };
+		3BE8985B161ACF4C00AEB2CD /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B625C15ED4F8B009A74FB /* JSONKit.m */; };
+		3BE8985C161ACF5200AEB2CD /* RPCRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A9B624415ED3010009A74FB /* RPCRequest.h */; };
+		3BE8985D161ACF5300AEB2CD /* RPCResponse.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A9B624A15ED3030009A74FB /* RPCResponse.h */; };
+		3BE8985F161ACF5C00AEB2CD /* RPCError.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A9B624715ED3021009A74FB /* RPCError.h */; };
+		3BE89860161ACF5E00AEB2CD /* JSONRPCClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A210B761606786D003DBBF1 /* JSONRPCClient.h */; };
+		3BE89861161ACF6200AEB2CD /* JSONRPCClient+Invoke.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A210B781606786D003DBBF1 /* JSONRPCClient+Invoke.h */; };
+		3BE89862161ACF6400AEB2CD /* JSONRPCClient+Multicall.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A210B7A1606786D003DBBF1 /* JSONRPCClient+Multicall.h */; };
+		3BE89863161ACF6700AEB2CD /* JSONRPCClient+Notification.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A210B7C1606786D003DBBF1 /* JSONRPCClient+Notification.h */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3BE89845161ACF0600AEB2CD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				3BE8984D161ACF0600AEB2CD /* jsonrpc.h in CopyFiles */,
+				3BE8985C161ACF5200AEB2CD /* RPCRequest.h in CopyFiles */,
+				3BE8985D161ACF5300AEB2CD /* RPCResponse.h in CopyFiles */,
+				3BE8985F161ACF5C00AEB2CD /* RPCError.h in CopyFiles */,
+				3BE89860161ACF5E00AEB2CD /* JSONRPCClient.h in CopyFiles */,
+				3BE89861161ACF6200AEB2CD /* JSONRPCClient+Invoke.h in CopyFiles */,
+				3BE89862161ACF6400AEB2CD /* JSONRPCClient+Multicall.h in CopyFiles */,
+				3BE89863161ACF6700AEB2CD /* JSONRPCClient+Notification.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3A210B761606786D003DBBF1 /* JSONRPCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONRPCClient.h; path = "RPC Client/Client/JSONRPCClient.h"; sourceTree = "<group>"; };
@@ -54,6 +92,10 @@
 		3A9B625B15ED4F8B009A74FB /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		3A9B625C15ED4F8B009A74FB /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		3A9B625D15ED4F8B009A74FB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		3BE89847161ACF0600AEB2CD /* libjsonrpc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libjsonrpc.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BE8984B161ACF0600AEB2CD /* jsonrpc-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jsonrpc-Prefix.pch"; sourceTree = "<group>"; };
+		3BE8984C161ACF0600AEB2CD /* jsonrpc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jsonrpc.h; sourceTree = "<group>"; };
+		3BE8984E161ACF0600AEB2CD /* jsonrpc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jsonrpc.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +109,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3BE89844161ACF0600AEB2CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BE89848161ACF0600AEB2CD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -74,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				3A9B622915ED2CD2009A74FB /* objc-JSONRpc */,
+				3BE89849161ACF0600AEB2CD /* jsonrpc */,
 				3A9B622215ED2CD2009A74FB /* Frameworks */,
 				3A9B622015ED2CD2009A74FB /* Products */,
 			);
@@ -83,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				3A9B621F15ED2CD2009A74FB /* objc-JSONRpc.app */,
+				3BE89847161ACF0600AEB2CD /* libjsonrpc.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -177,6 +229,24 @@
 			path = JSONKit;
 			sourceTree = "<group>";
 		};
+		3BE89849161ACF0600AEB2CD /* jsonrpc */ = {
+			isa = PBXGroup;
+			children = (
+				3BE8984C161ACF0600AEB2CD /* jsonrpc.h */,
+				3BE8984E161ACF0600AEB2CD /* jsonrpc.m */,
+				3BE8984A161ACF0600AEB2CD /* Supporting Files */,
+			);
+			path = jsonrpc;
+			sourceTree = "<group>";
+		};
+		3BE8984A161ACF0600AEB2CD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3BE8984B161ACF0600AEB2CD /* jsonrpc-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -196,6 +266,23 @@
 			productName = "objc-JSONRpc";
 			productReference = 3A9B621F15ED2CD2009A74FB /* objc-JSONRpc.app */;
 			productType = "com.apple.product-type.application";
+		};
+		3BE89846161ACF0600AEB2CD /* jsonrpc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3BE89852161ACF0600AEB2CD /* Build configuration list for PBXNativeTarget "jsonrpc" */;
+			buildPhases = (
+				3BE89843161ACF0600AEB2CD /* Sources */,
+				3BE89844161ACF0600AEB2CD /* Frameworks */,
+				3BE89845161ACF0600AEB2CD /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = jsonrpc;
+			productName = jsonrpc;
+			productReference = 3BE89847161ACF0600AEB2CD /* libjsonrpc.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -219,6 +306,7 @@
 			projectRoot = "";
 			targets = (
 				3A9B621E15ED2CD2009A74FB /* objc-JSONRpc */,
+				3BE89846161ACF0600AEB2CD /* jsonrpc */,
 			);
 		};
 /* End PBXProject section */
@@ -251,6 +339,22 @@
 				3A210B7F1606786D003DBBF1 /* JSONRPCClient+Invoke.m in Sources */,
 				3A210B801606786D003DBBF1 /* JSONRPCClient+Multicall.m in Sources */,
 				3A210B811606786D003DBBF1 /* JSONRPCClient+Notification.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3BE89843161ACF0600AEB2CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BE8984F161ACF0600AEB2CD /* jsonrpc.m in Sources */,
+				3BE89854161ACF3A00AEB2CD /* RPCRequest.m in Sources */,
+				3BE89855161ACF3B00AEB2CD /* RPCResponse.m in Sources */,
+				3BE89856161ACF3D00AEB2CD /* RPCError.m in Sources */,
+				3BE89857161ACF4000AEB2CD /* JSONRPCClient.m in Sources */,
+				3BE89858161ACF4200AEB2CD /* JSONRPCClient+Invoke.m in Sources */,
+				3BE89859161ACF4400AEB2CD /* JSONRPCClient+Multicall.m in Sources */,
+				3BE8985A161ACF4600AEB2CD /* JSONRPCClient+Notification.m in Sources */,
+				3BE8985B161ACF4C00AEB2CD /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +443,36 @@
 			};
 			name = Release;
 		};
+		3BE89850161ACF0600AEB2CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				DSTROOT = /tmp/jsonrpc.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "jsonrpc/jsonrpc-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		3BE89851161ACF0600AEB2CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				DSTROOT = /tmp/jsonrpc.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "jsonrpc/jsonrpc-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -359,6 +493,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		3BE89852161ACF0600AEB2CD /* Build configuration list for PBXNativeTarget "jsonrpc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BE89850161ACF0600AEB2CD /* Debug */,
+				3BE89851161ACF0600AEB2CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
