@@ -550,14 +550,18 @@
 		3BF5DC1F161B10D000428FA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SEPARATE_STRIP = NO;
 			};
 			name = Debug;
 		};
 		3BF5DC20161B10D000428FA7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SEPARATE_STRIP = NO;
 			};
 			name = Release;
 		};
