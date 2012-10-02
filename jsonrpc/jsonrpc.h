@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+#import "RPCError.h"
+#import "RPCRequest.h"
+#import "RPCResponse.h"
+
+#import "JSONRPCClient+Invoke.h"
+#import "JSONRPCClient+Notification.h"
+#import "JSONRPCClient+Multicall.h"
+
+#import "JSONRPCClient.h"
+
 @interface jsonrpc : NSObject
 
 @end
