@@ -56,6 +56,7 @@
 		3BE89861161ACF6200AEB2CD /* JSONRPCClient+Invoke.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A210B781606786D003DBBF1 /* JSONRPCClient+Invoke.h */; };
 		3BE89862161ACF6400AEB2CD /* JSONRPCClient+Multicall.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A210B7A1606786D003DBBF1 /* JSONRPCClient+Multicall.h */; };
 		3BE89863161ACF6700AEB2CD /* JSONRPCClient+Notification.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A210B7C1606786D003DBBF1 /* JSONRPCClient+Notification.h */; };
+		3BF5DC7B161B233D00428FA7 /* FixCategoryBug.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3BF5DC79161B216A00428FA7 /* FixCategoryBug.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				3BF5DC7B161B233D00428FA7 /* FixCategoryBug.h in CopyFiles */,
 				3BE8984D161ACF0600AEB2CD /* jsonrpc.h in CopyFiles */,
 				3BE8985C161ACF5200AEB2CD /* RPCRequest.h in CopyFiles */,
 				3BE8985D161ACF5300AEB2CD /* RPCResponse.h in CopyFiles */,
