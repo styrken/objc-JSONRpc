@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Rasmus Styrk. All rights reserved.
 //
 
+// Hack to allow categories to be used withing a static library/framework
+#define STATIC_CATEGORY(name) @interface STATIC_CATEGORY##name @end @implementation STATIC_CATEGORY##name @end
+
 #import <Foundation/Foundation.h>
 #import "RPCRequest.h"
 #import "RPCError.h"

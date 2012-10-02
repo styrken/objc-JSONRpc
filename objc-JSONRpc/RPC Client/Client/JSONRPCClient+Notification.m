@@ -9,6 +9,7 @@
 #import "JSONRPCClient+Notification.h"
 #import "JSONRPCClient+Invoke.h"
 
+STATIC_CATEGORY(JSONRPCClient_Notification)
 @implementation JSONRPCClient (Notification)
 
 - (void) notify:(NSString *)method params:(id)params

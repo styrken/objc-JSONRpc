@@ -9,6 +9,7 @@
 #import "JSONRPCClient+Invoke.h"
 #import "JSONKit.h"
 
+STATIC_CATEGORY(JSONRPCClient_Invoke)
 @implementation JSONRPCClient (Invoke)
 
 - (NSString *) invoke:(RPCRequest*) request
