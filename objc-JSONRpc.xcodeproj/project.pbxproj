@@ -56,7 +56,6 @@
 		3BE89861161ACF6200AEB2CD /* JSONRPCClient+Invoke.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A210B781606786D003DBBF1 /* JSONRPCClient+Invoke.h */; };
 		3BE89862161ACF6400AEB2CD /* JSONRPCClient+Multicall.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A210B7A1606786D003DBBF1 /* JSONRPCClient+Multicall.h */; };
 		3BE89863161ACF6700AEB2CD /* JSONRPCClient+Notification.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A210B7C1606786D003DBBF1 /* JSONRPCClient+Notification.h */; };
-		3BF5DC7B161B233D00428FA7 /* FixCategoryBug.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3BF5DC79161B216A00428FA7 /* FixCategoryBug.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +75,6 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				3BF5DC7B161B233D00428FA7 /* FixCategoryBug.h in CopyFiles */,
 				3BE8984D161ACF0600AEB2CD /* jsonrpc.h in CopyFiles */,
 				3BE8985C161ACF5200AEB2CD /* RPCRequest.h in CopyFiles */,
 				3BE8985D161ACF5300AEB2CD /* RPCResponse.h in CopyFiles */,
@@ -123,7 +121,6 @@
 		3BE8984B161ACF0600AEB2CD /* jsonrpc-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jsonrpc-Prefix.pch"; sourceTree = "<group>"; };
 		3BE8984C161ACF0600AEB2CD /* jsonrpc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jsonrpc.h; sourceTree = "<group>"; };
 		3BE8984E161ACF0600AEB2CD /* jsonrpc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jsonrpc.m; sourceTree = "<group>"; };
-		3BF5DC79161B216A00428FA7 /* FixCategoryBug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FixCategoryBug.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,7 +238,6 @@
 			isa = PBXGroup;
 			children = (
 				3A9B625915ED4F8B009A74FB /* JSONKit */,
-				3BF5DC79161B216A00428FA7 /* FixCategoryBug.h */,
 			);
 			name = Helpers;
 			path = "RPC Client/Helpers";

@@ -9,9 +9,6 @@
 #import "JSONRPCClient+Invoke.h"
 #import "JSONKit.h"
 
-#import "FixCategoryBug.h"
-
-FIX_CATEGORY_BUG(JSONRPCClient_Invoke)
 @implementation JSONRPCClient (Invoke)
 
 - (NSString *) invoke:(RPCRequest*) request
