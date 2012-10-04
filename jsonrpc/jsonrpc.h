@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "JSONKit.h"
+
 #import "RPCError.h"
 #import "RPCRequest.h"
 #import "RPCResponse.h"

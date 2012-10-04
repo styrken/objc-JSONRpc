@@ -38,6 +38,7 @@
 		3A9B625E15ED4F8B009A74FB /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B625A15ED4F8B009A74FB /* CHANGELOG.md */; };
 		3A9B625F15ED4F8B009A74FB /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9B625C15ED4F8B009A74FB /* JSONKit.m */; };
 		3A9B626015ED4F8B009A74FB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A9B625D15ED4F8B009A74FB /* README.md */; };
+		3B318280161D85220054C52B /* JSONKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3A9B625B15ED4F8B009A74FB /* JSONKit.h */; };
 		3BE89848161ACF0600AEB2CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9B622515ED2CD2009A74FB /* Foundation.framework */; };
 		3BE8984D161ACF0600AEB2CD /* jsonrpc.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3BE8984C161ACF0600AEB2CD /* jsonrpc.h */; };
 		3BE8984F161ACF0600AEB2CD /* jsonrpc.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8984E161ACF0600AEB2CD /* jsonrpc.m */; };
@@ -75,6 +76,7 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				3B318280161D85220054C52B /* JSONKit.h in CopyFiles */,
 				3BE8984D161ACF0600AEB2CD /* jsonrpc.h in CopyFiles */,
 				3BE8985C161ACF5200AEB2CD /* RPCRequest.h in CopyFiles */,
 				3BE8985D161ACF5300AEB2CD /* RPCResponse.h in CopyFiles */,
