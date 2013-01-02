@@ -72,6 +72,41 @@ These methods is public when you have an instance of the RPC Client.
 
 ```
 
+#### Invoking multicall
+
+Multicalls is a great way to send multiple requests as once. 
+
+````objective-c
+/**
+ * Sends  batch of RPCRequest objects to the server. The call to this method must be nil terminated.
+ * 
+ * @param RPCRequest request The first request to send
+ * @param ...A list of RPCRequest objects to send, must be nil terminated
+ */
+- (void) batch:(RPCRequest*) request, ...;
+````
+
+##### Example of a multicall
+
+````objective-c
+  JSONRPCClient *rpc = [[JSONRPCClient alloc] initWithServiceEndpoint:@"..."];
+
+  RPCRequest *doWork = [RPCRequest requestWithMethod:@"doWork" params:nil];
+  doWork.callback = ^(RPCResponse *response)
+  {
+    // Handle response here
+  };
+  
+  RPCRequest *doSomeOtherWork = [RPCRequest requestWithMethod:@"doSomeOtherWork" params:nil];
+  doSomeOtherWork.callback = ^(RPCResponse *response)
+  {
+    // Handle response here
+  };
+
+  [rpc batch:doWork, doSomeOtherWork, nil];
+  [rpc release];
+````
+
 #### Invoking notifications
 
 You need to ````#import "JSONRPCClient+Notification.h"```` to add notification support to the JSONRPCClient. These methods are added to the class as a category.
