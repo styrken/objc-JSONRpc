@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Objc-jsonrpc by styrken</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Objc-jsonrpc</h1>
+          <h2>An objective-c 2.0 JSON RPC Client</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/styrken/objc-JSONRpc/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/styrken/objc-JSONRpc/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/styrken/objc-JSONRpc" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>objc-JSONRpc</h1>
+
+<p>An objective-c 2.0 JSON RPC Client. Currently only supports json rpc version 2.0.</p>
+
+<h4>Todo:</h4>
+
+<ul>
+<li>Support ARC (might be a problem since JSONKit does not support ARC at the moment)</li>
+</ul><h4>Supports:</h4>
+
+<ul>
+<li>Single calls</li>
+<li>Notifications</li>
+<li>Multicall</li>
+</ul><h2>How-To</h2>
+
+<p>Follow these simple steps:</p>
+
+<ul>
+<li>Add RPC Client folder from within this project to your project</li>
+<li>#import "JSONRPCClient+Invoke.h"</li>
+<li>Start doing calls</li>
+</ul><p>NB: Remove JSONKit either from this client or your project if you already uses it to avoid symbol conflicts.</p>
+
+<div class="highlight"><pre>    <span class="n">JSONRPCClient</span> <span class="o">*</span><span class="n">rpc</span> <span class="o">=</span> <span class="p">[[</span><span class="n">JSONRPCClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithServiceEndpoint:</span><span class="s">@"... URL to your endpoint"</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">rpc</span> <span class="nl">invoke:</span><span class="s">@"your method"</span> <span class="nl">params:</span><span class="nb">nil</span> <span class="nl">onCompleted:</span><span class="o">^</span><span class="p">(</span><span class="n">RPCResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Respone: %@"</span><span class="p">,</span> <span class="n">response</span><span class="p">);</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Error: %@"</span><span class="p">,</span> <span class="n">response</span><span class="p">.</span><span class="n">error</span><span class="p">);</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@"Result: %@"</span><span class="p">,</span> <span class="n">response</span><span class="p">.</span><span class="n">result</span><span class="p">);</span>
+
+    <span class="p">}];</span>
+    <span class="p">[</span><span class="n">rpc</span> <span class="n">release</span><span class="p">];</span>
+</pre></div>
+
+<h4>Invoking methods/requests</h4>
+
+<p>These methods is public when you have an instance of the RPC Client.</p>
+
+<div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm"> * Invokes a RPCRequest against the end point</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param RPCRequest reqeust The request to invoke</span>
+<span class="cm"> * @param RPCCompletedCallback A callback method to invoke when request is done (or any error accours)</span>
+<span class="cm"> * @return NSString The used request id. Can be used to match callback's if neccesary</span>
+<span class="cm"> */</span>
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span> <span class="nf">invoke:</span><span class="p">(</span><span class="n">RPCRequest</span><span class="o">*</span><span class="p">)</span> <span class="n">request</span> <span class="nl">onCompleted:</span><span class="p">(</span><span class="n">RPCCompletedCallback</span><span class="p">)</span><span class="nv">callback</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Invokes a method against the end point</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param NSString method The method to invoke</span>
+<span class="cm"> * @param id Either named or un-named parameter list (or nil)</span>
+<span class="cm"> * @param RPCCompletedCallback A callback method to invoke when request is done (or any error accours)</span>
+<span class="cm"> * @return NSString The used request id. Can be used to match callback's if neccesary</span>
+<span class="cm"> */</span>
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span> <span class="nf">invoke:</span><span class="p">(</span><span class="n">NSString</span><span class="o">*</span><span class="p">)</span> <span class="n">method</span> <span class="nl">params:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span> <span class="n">params</span>  <span class="nl">onCompleted:</span><span class="p">(</span><span class="n">RPCCompletedCallback</span><span class="p">)</span><span class="nv">callback</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Invokes a method against endpoint providing a way to define both a success callback and a failure callback.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param NSString method The method to invoke</span>
+<span class="cm"> * @param id Either named or un-named parameter list (or nil)</span>
+<span class="cm"> * @param RPCSuccessCallback A callback method to invoke when request finishes successfull</span>
+<span class="cm"> * @param RPCFailedCallback A callback method to invoke when request finishes with an error</span>
+<span class="cm"> * @return NSString The used request id. Can be used to match callback's if neccesary</span>
+<span class="cm"> */</span>
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span> <span class="nf">invoke:</span><span class="p">(</span><span class="n">NSString</span><span class="o">*</span><span class="p">)</span> <span class="n">method</span> <span class="nl">params:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span> <span class="n">params</span> <span class="nl">onSuccess:</span><span class="p">(</span><span class="n">RPCSuccessCallback</span><span class="p">)</span><span class="nv">successCallback</span> <span class="nf">onFailure:</span><span class="p">(</span><span class="n">RPCFailedCallback</span><span class="p">)</span><span class="nv">failedCallback</span><span class="p">;</span>
+
+</pre></div>
+
+<h4>Invoking multicall</h4>
+
+<p>Multicalls is a great way to send multiple requests as once. </p>
+
+<div class="highlight"><pre><span class="cm">/**</span>
+<span class="cm"> * Sends  batch of RPCRequest objects to the server. The call to this method must be nil terminated.</span>
+<span class="cm"> * </span>
+<span class="cm"> * @param RPCRequest request The first request to send</span>
+<span class="cm"> * @param ...A list of RPCRequest objects to send, must be nil terminated</span>
+<span class="cm"> */</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">batch:</span><span class="p">(</span><span class="n">RPCRequest</span><span class="o">*</span><span class="p">)</span> <span class="n">request</span><span class="p">,</span> <span class="p">...;</span>
+</pre></div>
+
+<h5>Example of a multicall</h5>
+
+<div class="highlight"><pre>  <span class="n">JSONRPCClient</span> <span class="o">*</span><span class="n">rpc</span> <span class="o">=</span> <span class="p">[[</span><span class="n">JSONRPCClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithServiceEndpoint:</span><span class="s">@"..."</span><span class="p">];</span>
+
+  <span class="n">RPCRequest</span> <span class="o">*</span><span class="n">doWork</span> <span class="o">=</span> <span class="p">[</span><span class="n">RPCRequest</span> <span class="nl">requestWithMethod:</span><span class="s">@"doWork"</span> <span class="nl">params:</span><span class="nb">nil</span><span class="p">];</span>
+  <span class="n">doWork</span><span class="p">.</span><span class="n">callback</span> <span class="o">=</span> <span class="o">^</span><span class="p">(</span><span class="n">RPCResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="c1">// Handle response here</span>
+  <span class="p">};</span>
+
+  <span class="n">RPCRequest</span> <span class="o">*</span><span class="n">doSomeOtherWork</span> <span class="o">=</span> <span class="p">[</span><span class="n">RPCRequest</span> <span class="nl">requestWithMethod:</span><span class="s">@"doSomeOtherWork"</span> <span class="nl">params:</span><span class="nb">nil</span><span class="p">];</span>
+  <span class="n">doSomeOtherWork</span><span class="p">.</span><span class="n">callback</span> <span class="o">=</span> <span class="o">^</span><span class="p">(</span><span class="n">RPCResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="c1">// Handle response here</span>
+  <span class="p">};</span>
+
+  <span class="p">[</span><span class="n">rpc</span> <span class="nl">batch:</span><span class="n">doWork</span><span class="p">,</span> <span class="n">doSomeOtherWork</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+  <span class="p">[</span><span class="n">rpc</span> <span class="n">release</span><span class="p">];</span>
+</pre></div>
+
+<h4>Invoking notifications</h4>
+
+<p>You need to <code>#import "JSONRPCClient+Notification.h"</code> to add notification support to the JSONRPCClient. These methods are added to the class as a category.</p>
+
+<div class="highlight"><pre>
+<span class="cm">/**</span>
+<span class="cm"> * Sends a notification to json rpc server.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param NSString method Method to call</span>
+<span class="cm"> */</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">notify:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">method</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Sends a notification to json rpc server.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param NSString method Method to call</span>
+<span class="cm"> * @param id Either named or un-named parameter list (or nil)</span>
+<span class="cm"> */</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="nf">notify:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nv">method</span> <span class="nf">params:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">params</span><span class="p">;</span>
+</pre></div>
+
+<h5>Example of a notification</h5>
+
+<p>This could be used to keep a session alive on a webserver</p>
+
+<div class="highlight"><pre>  <span class="n">JSONRPCClient</span> <span class="o">*</span><span class="n">rpc</span> <span class="o">=</span> <span class="p">[[</span><span class="n">JSONRPCClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithServiceEndpoint:</span><span class="s">@"..."</span><span class="p">];</span>
+  <span class="p">[</span><span class="n">rpc</span> <span class="nl">notify:</span><span class="s">@"keepAlive"</span><span class="p">];</span>
+  <span class="p">[</span><span class="n">rpc</span> <span class="n">release</span><span class="p">];</span>
+</pre></div>
+        </section>
+
+        <footer>
+          Objc-jsonrpc is maintained by <a href="https://github.com/styrken">styrken</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
