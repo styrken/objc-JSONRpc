@@ -99,6 +99,59 @@
     }
 }
 
+- (RPCResponse*) sendSynchronousRequest:(RPCRequest *)request
+{
+	RPCResponse *response = [[RPCResponse alloc] init];
+
+    NSError *jsonError = nil;
+	NSData *payload = [[request serialize] JSONDataWithOptions:JKSerializeOptionNone error:&jsonError];
+
+	if(jsonError == nil)
+	{
+		NSMutableURLRequest *serviceRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.serviceEndpoint]];
+		[serviceRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+		[serviceRequest setValue:@"objc-JSONRpc/1.0" forHTTPHeaderField:@"User-Agent"];
+
+		[serviceRequest setValue:[NSString stringWithFormat:@"%i", payload.length] forHTTPHeaderField:@"Content-Length"];
+		[serviceRequest setHTTPMethod:@"POST"];
+		[serviceRequest setHTTPBody:payload];
+
+		NSURLResponse *serviceResponse = nil;
+		NSError *error = nil;
+		NSData *data = [NSURLConnection sendSynchronousRequest:serviceRequest returningResponse:&serviceResponse error:&error];
+
+		if(data != nil)
+		{
+			jsonError = nil;
+			id result = [data objectFromJSONDataWithParseOptions:JKParseOptionNone error:&jsonError];
+
+			if(data.length == 0)
+				response.error = [RPCError errorWithCode:RPCServerError];
+			else if(jsonError)
+				response.error = [RPCError errorWithCode:RPCParseError];
+			else if([result isKindOfClass:[NSDictionary class]])
+			{
+				NSDictionary *error = [result objectForKey:@"error"];
+				response.id = [result objectForKey:@"id"];
+				response.version = [result objectForKey:@"version"];
+
+				if(error && [error isKindOfClass:[NSDictionary class]])
+					response.error = [RPCError errorWithDictionary:error];
+				else
+					response.result = [result objectForKey:@"result"];
+			}
+			else
+				response.error = [RPCError errorWithCode:RPCParseError];
+		}
+		else
+			response.error = [RPCError errorWithCode:RPCParseError];
+	}
+	else
+		response.error = [RPCError errorWithCode:RPCParseError];
+		
+	return response;
+}
+
 #pragma mark - URL Connection delegates -
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response

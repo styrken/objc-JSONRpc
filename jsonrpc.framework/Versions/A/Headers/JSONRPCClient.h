@@ -82,4 +82,10 @@
  */
 - (void) postRequest:(RPCRequest*)request async:(BOOL)async;
 
+/**
+ * Sends a synchronous request that returns the response object
+ * instead of using callbacks
+ */
+- (RPCResponse*) sendSynchronousRequst:(RPCRequest*)request;
+
 @end
