@@ -56,13 +56,30 @@
 - (id) initWithServiceEndpoint:(NSString*) endpoint;
 
 /**
+ * Post requests syncronous
+ *
  * Posts requests to the server via HTTP post. Always uses multicall to simplify handling
  * of responses.
  * 
  * If the server your talking with do not understand multicall then you have a problem.
- * 
- * TODO: Fallback to single call if server not supports multicall
  */
 - (void) postRequests:(NSArray*)requests;
+
+/**
+ * Post Requests Async
+ *
+ * Posts requests to the server via HTTP post. Always uses multicall to simplify handling
+ * of responses.
+ *
+ * If the server your talking with do not understand multicall then you have a problem.
+ *
+ */
+- (void) postRequests:(NSArray *)requests async:(BOOL)async;
+
+/**
+ * Posts a single single request
+ *
+ */
+- (void) postRequest:(RPCRequest*)request async:(BOOL)async;
 
 @end

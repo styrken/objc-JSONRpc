@@ -40,7 +40,17 @@
 
 #pragma mark - Helpers
 
+- (void) postRequest:(RPCRequest*)request async:(BOOL)async
+{
+	[self postRequests:[NSArray arrayWithObject:request] async:async];
+}
+
 - (void) postRequests:(NSArray*)requests
+{
+	[self postRequests:requests async:YES];
+}
+
+- (void) postRequests:(NSArray *)requests async:(BOOL)async
 {
     NSMutableArray *serializedRequests = [[NSMutableArray alloc] initWithCapacity:requests.count];
     
@@ -52,13 +62,7 @@
     [serializedRequests release];
     
     if(jsonError != nil)
-    {
-        for(RPCRequest *request in requests)
-        {
-            if(request.callback)
-                request.callback([RPCResponse responseWithError:[RPCError errorWithCode:RPCParseError]]);
-        }
-    }
+		[self handleFailedRequests:requests withRPCError:[RPCError errorWithCode:RPCParseError]];
     else
     {
         NSMutableURLRequest *serviceRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:self.serviceEndpoint]];
@@ -68,41 +72,31 @@
         [serviceRequest setValue:[NSString stringWithFormat:@"%i", payload.length] forHTTPHeaderField:@"Content-Length"];
         [serviceRequest setHTTPMethod:@"POST"];
         [serviceRequest setHTTPBody:payload];
-        
-#ifndef __clang_analyzer__
-        NSURLConnection *serviceEndpointConnection = [[NSURLConnection alloc] initWithRequest:serviceRequest delegate:self];
-#endif
-        
-        NSMutableData *rData = [[NSMutableData alloc] init];
-        [self.requestData setObject:rData forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
-        [self.requests setObject:requests forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
-        [rData release];
-        [serviceRequest release];
-    }
-}
 
-- (void) handleResult:(NSDictionary*) result forRequest:(RPCRequest*)request
-{
-    if(!request.callback)
-        return;
-    
-    NSString *requestId = [result objectForKey:@"id"];
-    
-    NSDictionary *error = [result objectForKey:@"error"];
-    NSString *version = [result objectForKey:@"version"];
-    
-    RPCResponse *response = [[RPCResponse alloc] init];
-    response.id = requestId;
-    response.version = version;
-    
-    if(error && [error isKindOfClass:[NSDictionary class]])
-        response.error = [RPCError errorWithDictionary:error];
-    else
-        response.result = [result objectForKey:@"result"];
-    
-    request.callback(response);
-    
-    [response release];
+		if(async)
+		{
+#ifndef __clang_analyzer__
+			NSURLConnection *serviceEndpointConnection = [[NSURLConnection alloc] initWithRequest:serviceRequest delegate:self];
+#endif
+
+			NSMutableData *rData = [[NSMutableData alloc] init];
+			[self.requestData setObject:rData forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
+			[self.requests setObject:requests forKey:[NSNumber numberWithInt:(int)serviceEndpointConnection]];
+			[rData release];
+			[serviceRequest release];
+		}
+		else
+		{
+			NSURLResponse *response = nil;
+			NSError *error = nil;
+			NSData *data = [NSURLConnection sendSynchronousRequest:serviceRequest returningResponse:&response error:&error];
+
+			if(data != nil)
+				[self handleData:data withRequests:requests];
+			else
+				[self handleFailedRequests:requests withRPCError:[RPCError errorWithCode:RPCNetworkError]];
+		}
+    }
 }
 
 #pragma mark - URL Connection delegates -
@@ -124,14 +118,36 @@
     NSMutableData *data = [self.requestData objectForKey: [NSNumber numberWithInt:(int)connection]];
     NSArray *requests = [self.requests objectForKey: [NSNumber numberWithInt:(int)connection]];
 
-    NSError *jsonError = nil;
+	[self handleData:data withRequests:requests];
+  
+    [self.requestData removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
+    [self.requests removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
+    [connection release];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    NSArray *requests = [self.requests objectForKey: [NSNumber numberWithInt:(int)connection]];
+
+	[self handleFailedRequests:requests withRPCError:[RPCError errorWithCode:RPCNetworkError]];
+
+    [self.requestData removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
+    [self.requests removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
+    [connection release];
+}
+
+#pragma mark - Handling of data
+
+- (void) handleData:(NSData*)data withRequests:(NSArray*)requests
+{
+	NSError *jsonError = nil;
     id results = [data objectFromJSONDataWithParseOptions:JKParseOptionNone error:&jsonError];
-    
+
     for(RPCRequest *request in requests)
     {
         if(request.callback == nil)
             continue;
-        
+
         if(data.length == 0)
             request.callback([RPCResponse responseWithError:[RPCError errorWithCode:RPCServerError]]);
         else if(jsonError)
@@ -143,7 +159,7 @@
             for(NSDictionary *result in results)
             {
                 NSString *requestId = [result objectForKey:@"id"];
-                
+
                 if([requestId isEqualToString:request.id])
                 {
                     [self handleResult:result forRequest:request];
@@ -152,27 +168,43 @@
             }
         }
     }
- 
-    [self.requestData removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
-    [self.requests removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
-    [connection release];
+
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+- (void) handleFailedRequests:(NSArray*)requests withRPCError:(RPCError*)error
 {
-    NSArray *requests = [self.requests objectForKey: [NSNumber numberWithInt:(int)connection]];
-    
     for(RPCRequest *request in requests)
     {
         if(request.callback == nil)
             continue;
-        
-        request.callback([RPCResponse responseWithError:[RPCError errorWithCode:RPCNetworkError]]);
+
+        request.callback([RPCResponse responseWithError:error]);
     }
-    
-    [self.requestData removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
-    [self.requests removeObjectForKey: [NSNumber numberWithInt:(int)connection]];
-    [connection release];
+
+}
+
+- (void) handleResult:(NSDictionary*) result forRequest:(RPCRequest*)request
+{
+    if(!request.callback)
+        return;
+
+    NSString *requestId = [result objectForKey:@"id"];
+
+    NSDictionary *error = [result objectForKey:@"error"];
+    NSString *version = [result objectForKey:@"version"];
+
+    RPCResponse *response = [[RPCResponse alloc] init];
+    response.id = requestId;
+    response.version = version;
+
+    if(error && [error isKindOfClass:[NSDictionary class]])
+        response.error = [RPCError errorWithDictionary:error];
+    else
+        response.result = [result objectForKey:@"result"];
+
+    request.callback(response);
+
+    [response release];
 }
 
 @end

@@ -59,8 +59,17 @@
         NSLog(@"Multicall Response error: %@", response.error);
         
     }], [RPCRequest requestWithMethod:@"helloWorld"], [RPCRequest requestWithMethod:@"helloWorld"], nil];
-    
+
+	[rpc postRequest:[RPCRequest requestWithMethod:@"helloWorld" params:nil callback:^(RPCResponse *response) {
+        NSLog(@"Sync request: %@", response);
+        NSLog(@"Sync request error: %@", response.error);
+
+    }] async:NO];
+
+
     [rpc release];
+
+
     
     
     self.window.rootViewController = [[[UIViewController alloc] init] autorelease];
