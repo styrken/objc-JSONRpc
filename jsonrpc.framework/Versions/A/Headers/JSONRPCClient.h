@@ -86,6 +86,6 @@
  * Sends a synchronous request that returns the response object
  * instead of using callbacks
  */
-- (RPCResponse*) sendSynchronousRequst:(RPCRequest*)request;
+- (RPCResponse*) sendSynchronousRequest:(RPCRequest*)request;
 
 @end
