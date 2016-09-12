@@ -138,8 +138,8 @@ This could be used to keep a session alive on a webserver
   [rpc release];
 ````
 
-##### License
-
+License
+-------------------------
 Licensed under Attribution-ShareAlike 4.0 International
 
 Read more: https://creativecommons.org/licenses/by-sa/4.0/
